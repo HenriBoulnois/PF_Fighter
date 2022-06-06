@@ -2,11 +2,10 @@ import { NextPage } from "next";
 
 const Footer: NextPage = () => {
     return (
-        <div>
-            <a>Projet Pokemon React</a>
-            
-        </div>
-    )
+        <footer>
+            <div className="text-center"></div>
+        </footer>
+      )
 }
 
 export default Footer

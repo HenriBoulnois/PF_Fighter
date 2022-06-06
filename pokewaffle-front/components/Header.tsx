@@ -13,7 +13,7 @@ const Header: NextPage = () => {
                     Site Pokémon Next JS
                 </Typography>
                 <Stack direction="row" spacing={2}>
-                    <Button color="inherit" href="/">Pokedex</Button>
+                    <Button color="inherit" href="/pokedex">Pokedex</Button>
                     <Button color="inherit" href="/user">User</Button>
                 </Stack>
             </Toolbar>

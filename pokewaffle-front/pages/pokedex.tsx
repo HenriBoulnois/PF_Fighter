@@ -1,79 +1,48 @@
 import type { NextPage } from 'next'
 import React, { useState, useEffect, useCallback } from 'react'
-import { getDisplayName } from 'next/dist/shared/lib/utils';
+import Image from 'next/image';
+import { Grid } from '@mui/material';
+import Link from 'next/link';
 
 const Pokedex: NextPage = () => {
-    interface PokePreview {
-        name: string,
-        sprite: string,
-        id: number
+  interface PokePreview {
+    pokeId: number
+    nom: string,
+    description: string
+    image: string,
+    taille: number,
+    poids: number,
+    type: [typeId:number,nom:string]
+  }
+  
+  const [pokeList, setPokeList] = useState([]);
+  useEffect(() => {
+    async function getPokemons() {
+      const response = await fetch("http://localhost:8090/pokemons");
+      setPokeList(await response.json())
     }
-    //var pokeList:PokePreview[] = [];
-    const [pokeList, setPokeList] = useState<PokePreview[]>([]);
-    const [count, setCount] = useState(9);
+    getPokemons();
+  }, [])
+  
+  return (
+    <div className="p-5">
     
-    /*useEffect(() => {
-    for (let i = 1 ; i < 11; i++) {
-        var newPokemon:PokePreview = {name: "", sprite: "", id: 0};
-        axios
-          .get("https://pokeapi.co/api/v2/pokemon/" + i)
-          .then(function (response) {
-            
-            newPokemon.name = response.data.species.name;
-            newPokemon.sprite =
-              response.data.sprites.other?.["official-artwork"].front_default;
-            newPokemon.id = response.data.id;
-            setPokeList(pokeList => [...pokeList,newPokemon]);
-          });
-        }
-      }, []);*/
-      const fetchPokemon = useCallback(async (nbr: number) => {
-        /*for (let i = 1 ; i < 20; i++) {
-          var newPokemon:PokePreview = {name: "", sprite: "", id: 0};
-          let response = await fetch('https://pokeapi.co/api/v2/pokemon/'+i)
-          response = await response.json()
-          newPokemon.name = response.species.name;
-          newPokemon.sprite =
-                response.sprites.other?.["official-artwork"].front_default;
-          newPokemon.id = response.id;
-          setPokeList(pokeList => [...pokeList,newPokemon]);
-        }*/
-          for (let i = nbr + 1; i < nbr + 10; i++) {
-            let newPokemon:PokePreview = {name: "", sprite: "", id: 0};
-            let response = await fetch('https://pokeapi.co/api/v2/pokemon/'+i)
-            response = await response.json()
-            newPokemon.sprite = response.sprites.other?.["official-artwork"].front_default;
-            newPokemon.id = response.id;
-            let responseSpecies = await fetch("https://pokeapi.co/api/v2/pokemon-species/" + i)
-            responseSpecies = await responseSpecies.json()
-            newPokemon.name = responseSpecies.names[4].name;
-            //newPokemon.genus = response.data.genera[3].genus;
-            //newPokemon.generation = response.data.generation.name;
-            //newPokemon.location = response.data.habitat.name;
-            setPokeList(pokeList => [...pokeList,newPokemon]);
-          }   
-      }, [])
-      useEffect(() => {
-        fetchPokemon(0)
-      }, [])
-      const buttonHandler = () => {    
-        fetchPokemon(count)
-        setCount(count+9)
-      }
-    return (
-      <div className="flex flex-row">
-        <div className="basis-1/5"></div>
-        <div className="basis-3/5">
-        <h1 className="text-3xl font-bold underline">Pokedex</h1>
-        {pokeList.map(function(d, idx){
-        return (<li key={idx}>{d.id} {d.name}<img src={d.sprite}/></li>)
-      })}      
-        <button onClick={buttonHandler}>Pokemons suivants</button>
-        </div>
-        <div className="basis-1/5"></div>
-      </div>
-              
-    )
+    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      {pokeList.map((pokemon:PokePreview, index) => (
+        <Grid item xs={2} sm={4} md={4} key={index}>
+          <div className='text-center border pt-3 pb-3 rounded'>
+            <a href={"/pokemon?id="+pokemon.pokeId}>
+            <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
+            {pokemon.nom}
+            {pokemon.description}
+            </a>
+          </div>
+        </Grid>
+      ))}
+    </Grid>
+      
+    </div>
+  )
 }
-
+    
 export default Pokedex

@@ -4,11 +4,13 @@ import Header from "./Header";
 
 const Layout: NextPage = ({ children }) => {
     return (
-        <div>
+        <>
             <Header/>
+            <main className="h-full">
             { children }
+            </main>
             <Footer/>
-        </div>
+        </>
     )
 }
 
