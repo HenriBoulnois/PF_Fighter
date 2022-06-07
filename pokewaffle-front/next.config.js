@@ -6,6 +6,6 @@ const nextConfig = {
 module.exports = nextConfig
 module.exports = {
   images: {
-    domains: ['www.pokepedia.fr']
+    domains: ['www.pokepedia.fr','lh3.googleusercontent.com']
   }
 }

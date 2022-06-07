@@ -25,7 +25,7 @@ const Pokemon: NextPage = () => {
   useEffect(() => {
     async function getPokemon() {
         
-      const response = await fetch("http://localhost:8090/pokemons/"+id);
+      const response = await fetch("http://192.168.137.1:8090/pokemons/"+id);
       setPokemon(await response.json())
     }
     if(id) {

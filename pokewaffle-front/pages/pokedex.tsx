@@ -18,7 +18,7 @@ const Pokedex: NextPage = () => {
   const [pokeList, setPokeList] = useState([]);
   useEffect(() => {
     async function getPokemons() {
-      const response = await fetch("http://localhost:8090/pokemons");
+      const response = await fetch("http://192.168.137.1:8090/pokemons");
       setPokeList(await response.json())
     }
     getPokemons();
@@ -34,7 +34,6 @@ const Pokedex: NextPage = () => {
             <a href={"/pokemon?id="+pokemon.pokeId}>
             <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
             {pokemon.nom}
-            {pokemon.description}
             </a>
           </div>
         </Grid>
