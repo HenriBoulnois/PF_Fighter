@@ -18,7 +18,7 @@ const Pokedex: NextPage = () => {
   const [pokeList, setPokeList] = useState([]);
   useEffect(() => {
     async function getPokemons() {
-      const response = await fetch("http://192.168.137.1:8090/pokemons");
+      const response = await fetch("http://81.254.98.117:8090/pokemons");
       setPokeList(await response.json())
     }
     getPokemons();
@@ -29,15 +29,16 @@ const Pokedex: NextPage = () => {
     
     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
       {pokeList.map((pokemon:PokePreview, index) => (
-        <Link href={"/pokemon?id="+pokemon.pokeId}>
         <Grid item xs={2} sm={4} md={4} key={index}>
+          <Link href={"/pokemon?id="+pokemon.pokeId}>
           <div className='text-center border pt-3 pb-3 rounded'>
             
             <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
             {pokemon.nom}
           </div>
+          </Link>
         </Grid>
-        </Link>
+
       ))}
     </Grid>
       

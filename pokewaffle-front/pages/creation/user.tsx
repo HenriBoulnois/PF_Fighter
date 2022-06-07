@@ -8,30 +8,34 @@ import { useUser } from '@auth0/nextjs-auth0';
 import { Box } from '@mui/system';
 
 const Starter: NextPage = () => {
-    const { user, error, isLoading } = useUser();
-  if (user) {
-    const id = user.sub!.substring(user.sub!.indexOf('|')+1,user.sub!.length)
-    interface UserApi {
-        uuid: string,
-        nom: string,
-        photo: string,
-        email: string,
-        userId: string,
-        starterPokemon: number,
-      }
-      const [userApi, setUserApi] = useState<UserApi>();
+  interface UserApi {
+    uuid: string,
+    nom: string,
+    photo: string,
+    email: string,
+    userId: string,
+    starterPokemon: number,
+  }
+  const { user, error, isLoading } = useUser();
+  const id = user?.sub?.substring(user.sub?.indexOf('|')+1,user.sub?.length)
+    
+    
+    const [userApi, setUserApi] = useState<UserApi>();
       
       useEffect(() => {
         async function getUserApi() {
-          const response = await fetch("http://192.168.137.1:8090/utilisateurs/getByUuid/"+id);
+          const response = await fetch("http://81.254.98.117:8090/utilisateurs/getByUuid/"+id);
           setUserApi(await response.json())
         }
         getUserApi();
-      },[])
+      },[user,id])
+  if (user) {
+  
+      
       const handleSubmit = async (event:any) => {
         event.preventDefault()
           
-      const res = await fetch("http://192.168.137.1:8090/utilisateurs", {
+      const res = await fetch("http://81.254.98.117:8090/utilisateurs", {
           method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -44,14 +48,14 @@ const Starter: NextPage = () => {
           uuid: id
           }),
       });
-      const response = await fetch("http://192.168.137.1:8090/utilisateurs/getByUuid/"+id);
+      const response = await fetch("http://81.254.98.117:8090/utilisateurs/getByUuid/"+id);
           setUserApi(await response.json())
   
   }
       if(userApi) {
           return (
               <div>
-                  {userApi.nom}, merci d'avoir rejoint l'aventure, tu peux maintenant choisir ton personnage ! <a href="/creation/character">Personnage</a>
+                  {userApi.nom}, merci d&apos;avoir rejoint l&apos;aventure, tu peux maintenant choisir ton personnage ! <Link href="/creation/character">Personnage</Link>
               </div>
             
           ) 
@@ -77,7 +81,7 @@ const Starter: NextPage = () => {
   }
   return (
       <div>
-          <p>Vous n'êtes pas encore connecté, cliquez en haut à droite pour nous rejoindre</p>
+          <p>Vous n&apos;êtes pas encore connecté, cliquez en haut à droite pour nous rejoindre</p>
       </div>      
   )
 };

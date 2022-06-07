@@ -25,7 +25,7 @@ const Character: NextPage = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const id = user?.sub!.substring(user.sub!.indexOf('|')+1,user.sub!.length)
+  const id = user?.sub?.substring(user.sub?.indexOf('|')+1,user.sub?.length)
     interface UserApi {
         uuid: string,
         nom: string,
@@ -37,20 +37,20 @@ const Character: NextPage = () => {
       const [userApi, setUserApi] = useState<UserApi>();
       useEffect(() => {
         async function getUserApi() {
-          const response = await fetch("http://192.168.137.1:8090/utilisateurs/getByUuid/"+id);
+          const response = await fetch("http://81.254.98.117:8090/utilisateurs/getByUuid/"+id);
           setUserApi(await response.json())
         }
         getUserApi();
       }, [])
   useEffect(() => {
     async function getPokemons() {
-      const response = await fetch("http://192.168.137.1:8090/utilisateurs/getCharacters");
+      const response = await fetch("http://81.254.98.117:8090/utilisateurs/getCharacters");
       setPokeList(await response.json())
     }
     getPokemons();
   }, [])
   async function choseCharacter(idPersonnage:number) {
-    await fetch("http://192.168.137.1:8090/utilisateurs/setCharacter", {
+    await fetch("http://81.254.98.117:8090/utilisateurs/setCharacter", {
         method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -90,14 +90,14 @@ const Character: NextPage = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>J'hésite encore</Button>
+          <Button onClick={handleClose}>J&apos;hésite encore</Button>
           <Button autoFocus onClick={() => choseCharacter(character.charId)}>
             Je te choisis !
           </Button>
         </DialogActions>
       </Dialog>
             <Image src={character.photo} height={631} width={245} alt={character.nom}></Image><br/>
-            <Button variant="contained" href={"/pokemon?id="+character.charId}>Plus d'infos</Button><br/>
+            <Button variant="contained" href={"/pokemon?id="+character.charId}>Plus d&apos;infos</Button><br/>
             </div>
           
         </Grid>
