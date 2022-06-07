@@ -1,10 +1,15 @@
 import type { NextPage } from 'next'
+import IsLogged from '../components/IsLogged'
+import Login from './user'
 
 
 const Home: NextPage = () => {
   return (
     <div>
-        <h1 className="font-bold underline">Homepage</h1>
+      <IsLogged>
+        <p>Text homepage</p>
+      </IsLogged>
+          
     </div>
     
   )

@@ -29,14 +29,15 @@ const Pokedex: NextPage = () => {
     
     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
       {pokeList.map((pokemon:PokePreview, index) => (
+        <Link href={"/pokemon?id="+pokemon.pokeId}>
         <Grid item xs={2} sm={4} md={4} key={index}>
           <div className='text-center border pt-3 pb-3 rounded'>
-            <a href={"/pokemon?id="+pokemon.pokeId}>
+            
             <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
             {pokemon.nom}
-            </a>
           </div>
         </Grid>
+        </Link>
       ))}
     </Grid>
       

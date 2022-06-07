@@ -1,19 +1,27 @@
 import { NextPage } from "next";
 import { UserProfile, useUser } from '@auth0/nextjs-auth0';
 import Image from 'next/image';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
+import Link from "next/link";
 
 const LoginHeader: NextPage = () => {
     const { user, error, isLoading } = useUser();
-
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
   if (user) {
    return (
        <div>
-        <Image src={user.picture} width={56} height={56}/>
+        <Button color="inherit" href="/user">User</Button>
         <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -21,7 +29,7 @@ const LoginHeader: NextPage = () => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        Dashboard
+        <Image src={user.picture} width={56} height={56}/>
       </Button>
       <Menu
         id="basic-menu"
@@ -34,7 +42,7 @@ const LoginHeader: NextPage = () => {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <Link href="/api/auth/logout"><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
       </Menu>
       </div>
    );
