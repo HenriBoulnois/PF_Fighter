@@ -41,7 +41,7 @@ const Character: NextPage = () => {
           setUserApi(await response.json())
         }
         getUserApi();
-      }, [])
+      }, [id])
   useEffect(() => {
     async function getPokemons() {
       const response = await fetch("http://81.254.98.117:8090/utilisateurs/getCharacters");

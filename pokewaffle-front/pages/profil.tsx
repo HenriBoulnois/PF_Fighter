@@ -11,7 +11,7 @@ const Profil: NextPage = () => {
   const { user, error, isLoading } = useUser();
   return (
     <IsLogged>
-      Welcome {user?.name}! <Image src={user?.picture!} width={200} height={200}></Image><Link href="/api/auth/logout">Logout</Link>
+      Welcome {user?.name}! <Image src={user!.picture!} width={200} height={200} alt={user!.name!}></Image><Link href="/api/auth/logout">Logout</Link>
   </IsLogged>
   );
 };

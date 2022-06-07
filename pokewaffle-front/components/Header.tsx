@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Link from "next/link";
 import AdbIcon from '@mui/icons-material/Adb';
 import LoginHeader from "./LoginHeader";
+import Image from "next/image";
 
 const Header: NextPage = () => {
     interface PokePreview {
@@ -37,9 +38,9 @@ const Header: NextPage = () => {
       autoHighlight
       getOptionLabel={(pokemon:PokePreview) => pokemon.nom}
       renderOption={(props, pokemon) => (
-          <Link href={"/pokemon?id="+pokemon.pokeId}>
+          <Link href={"/pokemon?id="+pokemon.pokeId} passHref={true}>
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-          <img
+          <Image
             loading="lazy"
             width="70"
             src={pokemon.petiteImage}
