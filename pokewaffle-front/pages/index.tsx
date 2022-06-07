@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import IsLogged from '../components/IsLogged'
-import Login from './user'
+import Login from './profil'
 
 
 const Home: NextPage = () => {

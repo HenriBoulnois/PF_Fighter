@@ -21,7 +21,7 @@ const LoginHeader: NextPage = () => {
   if (user) {
    return (
        <div>
-        <Button color="inherit" href="/user">User</Button>
+        <Button color="inherit" href="/profil">Profil</Button>
         <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -29,7 +29,7 @@ const LoginHeader: NextPage = () => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <Image src={user.picture} width={56} height={56}/>
+        <Image src={user.picture!} width={56} height={56}/>
       </Button>
       <Menu
         id="basic-menu"
