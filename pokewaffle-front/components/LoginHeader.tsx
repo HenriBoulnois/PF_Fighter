@@ -23,7 +23,7 @@ const LoginHeader: NextPage = () => {
           setUserApi(await response.json())
         }
         getUserApi();
-      }, [user,id,userApi])
+      }, [user,id])
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
