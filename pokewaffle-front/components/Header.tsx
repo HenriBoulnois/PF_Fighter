@@ -61,7 +61,6 @@ const Header: NextPage = () => {
       )}
     />
                     <Button color="inherit" href="/pokedex">Pokedex</Button>
-                    <Button color="inherit" href="/user">User</Button>
                     <LoginHeader/>
                 </Stack>
             </Toolbar>

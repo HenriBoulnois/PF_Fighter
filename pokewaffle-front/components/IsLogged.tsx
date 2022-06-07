@@ -1,9 +1,6 @@
 import { NextPage } from "next";
 import { UserProfile, useUser } from '@auth0/nextjs-auth0';
-import Image from 'next/image';
 import { useEffect, useState } from "react";
-import Router from "next/router";
-import LoginHeader from "../components/LoginHeader";
 
 const IsLogged: NextPage = ({children}) => {
     const { user, error, isLoading } = useUser();
@@ -36,7 +33,8 @@ const IsLogged: NextPage = ({children}) => {
         return (
           <div>
             <p>
-              Veuillez choisir votre starter : <a href="/starter">CLiquer</a>
+              Vous n'avez pas encore choisi votre personnage ou votre Pokémon, êtes-vous prêt à sauter le pas ?
+              Veuillez choisir votre starter : <a href="/creation/user">CLiquer</a>
             </p>
           </div>
           
@@ -47,7 +45,7 @@ const IsLogged: NextPage = ({children}) => {
   }
   return (
       <div>
-          <p>Veuillez vous connecter</p>
+          <p>Vous n'êtes pas encore connecté, cliquez en haut à droite pour nous rejoindre</p>
       </div>      
   )
 };
