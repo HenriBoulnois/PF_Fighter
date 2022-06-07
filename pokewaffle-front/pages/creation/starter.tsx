@@ -29,7 +29,7 @@ const Starter: NextPage = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const id = user?.sub!.substring(user.sub!.indexOf('|')+1,user.sub!.length)
+  const id = user?.sub?.substring(user?.sub?.indexOf('|')+1,user?.sub?.length)
     interface UserApi {
         uuid: string,
         nom: string,
@@ -41,14 +41,14 @@ const Starter: NextPage = () => {
       const [userApi, setUserApi] = useState<UserApi>();
       useEffect(() => {
         async function getUserApi() {
-          const response = await fetch("http://192.168.137.1:8090/utilisateurs/getByUuid/"+id);
+          const response = await fetch("http://81.254.98.117:8090/utilisateurs/getByUuid/"+id);
           setUserApi(await response.json())
         }
         getUserApi();
-      }, [])
+      }, [id])
   useEffect(() => {
     async function getPokemons() {
-      const response = await fetch("http://192.168.137.1:8090/pokemons/getStarters");
+      const response = await fetch("http://81.254.98.117:8090/pokemons/getStarters");
       setPokeList(await response.json())
     }
     getPokemons();
@@ -94,14 +94,14 @@ const Starter: NextPage = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>J'hésite encore</Button>
+          <Button onClick={handleClose}>J&apos;hésite encore</Button>
           <Button autoFocus onClick={() => choseStarter(pokemon.pokeId)}>
             Je te choisis !
           </Button>
         </DialogActions>
       </Dialog>
             <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
-            <Button variant="contained" href={"/pokemon?id="+pokemon.pokeId}>Plus d'infos</Button><br/>
+            <Button variant="contained" href={"/pokemon?id="+pokemon.pokeId}>Plus d&apos;infos</Button><br/>
             </div>
           
         </Grid>
