@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import React, { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid } from '@mui/material';
+import { Button, Card, CardContent, CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0';
@@ -19,33 +19,9 @@ const Starter: NextPage = () => {
   }
   
   const [pokeList, setPokeList] = useState([]);
+  const [pokeFocused, setPokeFocused] = useState<PokePreview>()
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   const id = user?.sub?.substring(user?.sub?.indexOf('|')+1,user?.sub?.length)
-    interface UserApi {
-        uuid: string,
-        nom: string,
-        photo: string,
-        email: string,
-        userId: string,
-        starterPokemon: number,
-      }
-      const [userApi, setUserApi] = useState<UserApi>();
-      useEffect(() => {
-        async function getUserApi() {
-          const response = await fetch("http://81.254.98.117:8090/utilisateurs/getByUuid/"+id);
-          setUserApi(await response.json())
-        }
-        getUserApi();
-      }, [id])
   useEffect(() => {
     async function getPokemons() {
       const response = await fetch("http://81.254.98.117:8090/pokemons/getStarters");
@@ -53,8 +29,11 @@ const Starter: NextPage = () => {
     }
     getPokemons();
   }, [])
+  function focusPokemon(pokemonFocused:PokePreview) {
+    setPokeFocused(pokemonFocused)
+  }
   async function choseStarter(idPokemon:number) {
-    await fetch("http://192.168.137.1:8090/utilisateurs/setStarter", {
+    await fetch("http://81.254.98.117:8090/utilisateurs/setStarter", {
         method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -62,13 +41,38 @@ const Starter: NextPage = () => {
       'Access-Control-Allow-Origin':'*'
     },
         body: JSON.stringify({
-            idUtilisateur: userApi,
+            uuidUtilisateur: id,
             idStarter: idPokemon
         }),
     });
-    setOpen(false);
     Router.push("/");
 }
+if(pokeFocused) {
+  console.log(pokeFocused)
+  return (
+  <div>
+        <Card sx={{ maxWidth: 200 }}>
+      <CardMedia
+        component="img"
+        height="140"
+        image={pokeFocused.image}
+        alt={pokeFocused.nom}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {pokeFocused.nom}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+        <Button color="success" onClick={() => choseStarter(pokeFocused.pokeId)}>
+        {pokeFocused.nom}
+      </Button>
+        </Typography>
+      </CardContent>
+    </Card>
+
+      </div>
+  )
+} 
   return (
     <div className="p-5">
     
@@ -78,28 +82,9 @@ const Starter: NextPage = () => {
         <Grid item xs={2} sm={4} md={4} key={index}>
             
           <div className='text-center border pt-3 pb-3 rounded'>
-          <Button color="success" onClick={handleClickOpen}>
+          <Button color="success" onClick={() => focusPokemon(pokemon)}>
         {pokemon.nom}, je te choisis !
       </Button><br/>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-      >
-        <DialogTitle>
-          {"Choix starter"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Êtes-vous sûr de votre choix ? Votre starter ne pourra pas être changé plus tard.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>J&apos;hésite encore</Button>
-          <Button autoFocus onClick={() => choseStarter(pokemon.pokeId)}>
-            Je te choisis !
-          </Button>
-        </DialogActions>
-      </Dialog>
             <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
             <Button variant="contained" href={"/pokemon?id="+pokemon.pokeId}>Plus d&apos;infos</Button><br/>
             </div>

@@ -42,7 +42,8 @@ const Header: NextPage = () => {
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
           <Image
             loading="lazy"
-            width="70"
+            width={70}
+            height={70}
             src={pokemon.petiteImage}
             alt=""
           />
