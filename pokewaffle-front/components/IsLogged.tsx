@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useUser } from '@auth0/nextjs-auth0';
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { isGeneratorFunction } from "util/types";
 
 const IsLogged: NextPage = ({children}) => {
   interface UserApi {
@@ -20,10 +21,12 @@ const IsLogged: NextPage = ({children}) => {
           const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/getByUuid/"+id);
           setUserApi(await response.json())
         }
+        if(user) {
         getUserApi();
+        }
       }, [user,id])
   if (user) {
-      if(userApi?.starterPokemon) {
+      if(userApi?.starterPokemon!) {
           return (
               <div>
                {children}
@@ -43,12 +46,13 @@ const IsLogged: NextPage = ({children}) => {
     }
       
     
-  }
+  }else {
   return (
       <div>
           <p>Vous n&apos;êtes pas encore connecté, cliquez en haut à droite pour nous rejoindre</p>
       </div>      
   )
+  }
 };
 
 export default IsLogged
