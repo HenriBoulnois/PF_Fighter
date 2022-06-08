@@ -64,7 +64,7 @@ const Pokemon: NextPage = () => {
           Poids : {pokemon.poids} kg
         </div>
         <div className='basis-2/4'>
-          <Image src={pokemon.image} height={200} width={200}/>
+          <Image src={pokemon.image} height={200} width={200} alt="pokemonImage"/>
         </div>
         <div className='basis-1/4'>
           PV : {pokemon.pv} <br/>

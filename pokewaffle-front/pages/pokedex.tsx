@@ -27,7 +27,7 @@ const Pokedex: NextPage = () => {
   return (
     <div className="grid grid-cols-4 gap-4 m-10">
       {pokeList.map((pokemon:PokePreview, index) => (
-        <Link href={"/pokemon?id="+pokemon.pokeId} passHref={true}>
+        <Link key={index} href={"/pokemon?id="+pokemon.pokeId} passHref={true}>
           <div className='text-center border pt-3 pb-3 rounded'>
             
             <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>

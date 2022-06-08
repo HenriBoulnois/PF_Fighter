@@ -46,55 +46,60 @@ const WinnerFight: NextPage = () => {
     const {
         query: {opponentid,spoke,opoke}
     } = useRouter()
-    async function getSelf(selfuuid:string) {
-        const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/getByUuid/"+selfuuid);
-        const self = await response.json()
-        await getSelfPokemon(self);
-      }
-      async function getSelfPokemon(user:UserPreview) {
-        const userTeam =({
-             user,
-             pokemon: await getPokemon(spoke)
-         }) 
-       setSelfTeamList(userTeam)
-     }
+  
+      
 
-    async function getOpponent() {
-        const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/"+opponentid);
-        const opponent = await response.json()
-        await getOpponentPokemon(opponent);
-      }
-      async function getOpponentPokemon(user:UserPreview) {
-         const userTeam =({
-              user,
-              pokemon: await getPokemon(opoke)
-          }) 
-        setOpponentTeamList(userTeam)
-      }
+    
+      
       async function getPokemon(pokemonId:any) {
         const res = await fetch("http://pokefighter.hopto.org:8090/pokemons/"+pokemonId);
         return await res.json()
       }
-      async function getResult() {
-        const res = await fetch("http://pokefighter.hopto.org:8090/combats/", {
-            method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json; charset=utf-8',
-          'Access-Control-Allow-Origin':'*'
-        },
-            body: JSON.stringify({
-                idPokemonCombattant1: selfTeamList?.pokemon.pokeId,
-                idPokemonCombattant2: opponentTeamList?.pokemon.pokeId,
-                uuidUtilisateur1: selfTeamList?.user.uuid,
-                uuidUtilisateur2: opponentTeamList?.user.uuid,
-                idUtilisateur1: selfTeamList?.user.userId,
-                idUtilisateur2: opponentTeamList?.user.userId
-            }),
-        });
-        console.log(res);
-      }
+      
       useEffect(() => {
+        async function getOpponentPokemon(user:UserPreview) {
+          const userTeam =({
+               user,
+               pokemon: await getPokemon(opoke)
+           }) 
+         setOpponentTeamList(userTeam)
+       }
+        async function getSelfPokemon(user:UserPreview) {
+          const userTeam =({
+               user,
+               pokemon: await getPokemon(spoke)
+           }) 
+         setSelfTeamList(userTeam)
+       }
+        async function getSelf(selfuuid:string) {
+          const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/getByUuid/"+selfuuid);
+          const self = await response.json()
+          await getSelfPokemon(self);
+        }
+        async function getOpponent() {
+          const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/"+opponentid);
+          const opponent = await response.json()
+          await getOpponentPokemon(opponent);
+        }
+        async function getResult() {
+          const res = await fetch("http://pokefighter.hopto.org:8090/combats/", {
+              method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json; charset=utf-8',
+            'Access-Control-Allow-Origin':'*'
+          },
+              body: JSON.stringify({
+                  idPokemonCombattant1: selfTeamList?.pokemon.pokeId,
+                  idPokemonCombattant2: opponentTeamList?.pokemon.pokeId,
+                  uuidUtilisateur1: selfTeamList?.user.uuid,
+                  uuidUtilisateur2: opponentTeamList?.user.uuid,
+                  idUtilisateur1: selfTeamList?.user.userId,
+                  idUtilisateur2: opponentTeamList?.user.userId
+              }),
+          });
+          console.log(res);
+        }
           if(opponentid) {
             getOpponent();
           }
@@ -103,7 +108,7 @@ const WinnerFight: NextPage = () => {
               getSelf(uuid!);
               getResult();
           }
-      }, [opponentid, user])
+      }, [opponentid, user, opoke, spoke, opponentTeamList?.pokemon.pokeId, opponentTeamList?.user.userId, opponentTeamList?.user.uuid, selfTeamList?.pokemon.pokeId, selfTeamList?.user.userId, selfTeamList?.user.uuid])
   return (
       <IsLogged>
           <div className='flex flex-column'>

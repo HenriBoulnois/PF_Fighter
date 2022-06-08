@@ -7,7 +7,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 
 
 const Character: NextPage = () => {
-  const { user, error, isLoading } = useUser();
+  const { user } = useUser();
   interface CharacterPreview {
     charId:number,
     nom:string,
@@ -61,7 +61,7 @@ if(characterFocused) {
       <div className='flex flex-column text-center'>
         
         <div className='basis-2/4'>
-          <Image src={characterFocused.photo} height={631} width={245}/>
+          <Image src={characterFocused.photo} height={631} width={245} alt="characterFocusedPhoto"/>
         </div>
         <div className='basis-2/4 text-left m-5'>
           <p className='font-bold'>Description</p><br/>{characterFocused.description}
@@ -83,7 +83,7 @@ return (
   </div>
   <div className="grid grid-cols-2 gap-2 m-10 basis-2/4">
       {characterList.map((character:CharacterPreview, index) => (
-          <div className='text-center border pt-3 pb-3 rounded'>
+          <div key={index} className='text-center border pt-3 pb-3 rounded'>
           <button onClick={() => focusCharacter(character)}>
         {character.nom}
       </button><br/>

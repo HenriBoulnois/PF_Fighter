@@ -12,7 +12,7 @@ const Starter: NextPage = () => {
     userId: string,
     starterPokemon: number,
   }
-  const { user, error, isLoading } = useUser();
+  const { user } = useUser();
   const id = user?.sub?.substring(user.sub?.indexOf('|')+1,user.sub?.length)
     
     

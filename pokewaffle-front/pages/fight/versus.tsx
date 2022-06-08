@@ -47,45 +47,46 @@ const VersusFight: NextPage = () => {
     const {
         query: {id}
     } = useRouter()
-    async function getSelf(selfuuid:string) {
-        const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/getByUuid/"+selfuuid);
-        const self = await response.json()
-        await getSelfTeam(self);
-      }
-      async function getSelfTeam(user:UserPreview) {
-        const userTeam =({
-             user,
-             team: await getTeam(user)
-         }) 
-           console.log(userTeam)
-       setSelfTeamList(userTeam)
-     }
-
-    async function getOpponent() {
-        const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/"+id);
-        const opponent = await response.json()
-        await getOpponentTeam(opponent);
-      }
-      async function getOpponentTeam(user:UserPreview) {
-         const userTeam =({
-              user,
-              team: await getTeam(user)
-          }) 
-            
-        setOpponentTeamList(userTeam)
-      }
-      async function getTeam(user:UserPreview) {
-        return Promise.all(user.equipe.map(pokemon => 
-          getPokemonTeam(pokemon.idPokemon)
-        )
-        )
-      }
+   
       async function getPokemonTeam(idPokemonEquipe:number) {
         const res = await fetch("http://pokefighter.hopto.org:8090/pokemons/"+idPokemonEquipe);
         return await res.json()
     
       }
       useEffect(() => {
+        async function getSelf(selfuuid:string) {
+          const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/getByUuid/"+selfuuid);
+          const self = await response.json()
+          await getSelfTeam(self);
+        }
+        async function getSelfTeam(user:UserPreview) {
+          const userTeam =({
+               user,
+               team: await getTeam(user)
+           }) 
+             console.log(userTeam)
+         setSelfTeamList(userTeam)
+       }
+  
+      async function getOpponent() {
+          const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/"+id);
+          const opponent = await response.json()
+          await getOpponentTeam(opponent);
+        }
+        async function getOpponentTeam(user:UserPreview) {
+           const userTeam =({
+                user,
+                team: await getTeam(user)
+            }) 
+              
+          setOpponentTeamList(userTeam)
+        }
+        async function getTeam(user:UserPreview) {
+          return Promise.all(user.equipe.map(pokemon => 
+            getPokemonTeam(pokemon.idPokemon)
+          )
+          )
+        }
           if(id) {
             getOpponent();
           }
@@ -105,7 +106,7 @@ const VersusFight: NextPage = () => {
       {selfTeamList?.user.nom}
       {selfTeamList?.team?.map((pokemon:PokePreview, index) => (
     
-          <div className='text-center border pt-3 pb-3 rounded'>
+          <div key={index} className='text-center border pt-3 pb-3 rounded'>
             
             <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
             {pokemon.nom}
@@ -115,7 +116,7 @@ const VersusFight: NextPage = () => {
       <div className='basis-3/6'>
           {opponentTeamList?.user.nom}
       {opponentTeamList?.team?.map((pokemon:PokePreview, index) => (
-          <Link href={"/fight/winner?opponentid="+opponentTeamList.user.userId+"&spoke=25&opoke="+pokemon.pokeId} passHref={true}>
+          <Link key={index} href={"/fight/winner?opponentid="+opponentTeamList.user.userId+"&spoke=25&opoke="+pokemon.pokeId} passHref={true}>
           <div className='text-center border pt-3 pb-3 rounded'>
             <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
             {pokemon.nom} 

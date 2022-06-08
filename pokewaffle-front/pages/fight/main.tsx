@@ -48,34 +48,36 @@ interface UserTeamPreview{
 
 const MainFight: NextPage = () => {
   const [usersTeamList, setUsersTeamList] = useState<UserTeamPreview[]>([])
-  async function getUsers() {
-    const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs");
-    const listUsers = await response.json()
-    await getEachEquipe(listUsers);
-  }
-  async function getEachEquipe(listUsers:UserPreview[]) {
-    const listEquipe = await Promise.all(
-      listUsers.map(async (user) => ({
-        ...user,
-        team: await getTeam(user)
-      })
-      )
-    )
-    console.log(listEquipe)
-    setUsersTeamList(listEquipe)
-  }
-  async function getTeam(user:UserPreview) {
-    return Promise.all(user.equipe.map(pokemon => 
-      getPokemonTeam(pokemon.idPokemon)
-    )
-    )
-  }
+  
+  
   async function getPokemonTeam(idPokemonEquipe:number) {
     const res = await fetch("http://pokefighter.hopto.org:8090/pokemons/"+idPokemonEquipe);
     return await res.json()
 
   }
   useEffect(() => {
+    async function getUsers() {
+      const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs");
+      const listUsers = await response.json()
+      await getEachEquipe(listUsers);
+    }
+    async function getEachEquipe(listUsers:UserPreview[]) {
+      const listEquipe = await Promise.all(
+        listUsers.map(async (user) => ({
+          ...user,
+          team: await getTeam(user)
+        })
+        )
+      )
+      console.log(listEquipe)
+      setUsersTeamList(listEquipe)
+    }
+    async function getTeam(user:UserPreview) {
+      return Promise.all(user.equipe.map(pokemon => 
+        getPokemonTeam(pokemon.idPokemon)
+      )
+      )
+    }
     getUsers();
   }, [])
   return (
@@ -89,19 +91,19 @@ const MainFight: NextPage = () => {
       moi
       </div>
       <div className='basis-3/6'>
-      {usersTeamList.map((user) => (
-        <Link href={"/fight/versus?id="+user.userId} passHref={true}>
+      {usersTeamList.map((user,index) => (
+        <Link key={index} href={"/fight/versus?id="+user.userId} passHref={true}>
           <div className='text-center border pt-3 pb-3 rounded'>
             
             <Image src={user.photo} height={30} width={30} alt={user.nom}></Image><br/>
             {user.nom}
-            {user.team.map((pokemon => (
-              <div>
+            {user.team.map((pokemon,indexPoke) => (
+              <div key={indexPoke}>
                 
               <Image src={pokemon.petiteImage} height={50} width={50} alt={pokemon.nom}></Image><br/>
               {pokemon.nom}
               </div>
-            )))}
+            ))}
           </div>
           </Link>
       ))}

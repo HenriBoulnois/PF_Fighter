@@ -66,7 +66,7 @@ if(pokeFocused) {
           Poids : {pokeFocused.poids} kg
         </div>
         <div className='basis-2/4'>
-          <Image src={pokeFocused.image} height={200} width={200}/>
+          <Image src={pokeFocused.image} height={200} width={200} alt="pokeFocusedImage"/>
         </div>
         <div className='basis-1/4'>
           PV : {pokeFocused.pv} <br/>
@@ -98,7 +98,7 @@ if(pokeFocused) {
   </div>
   <div className="grid grid-cols-3 gap-3 m-10 basis-2/4">
       {pokeList.map((pokemon:PokePreview, index) => (
-          <div className='text-center border pt-3 pb-3 rounded'>
+          <div key={index} className='text-center border pt-3 pb-3 rounded'>
           <button onClick={() => focusPokemon(pokemon)}>
         {pokemon.nom}
       </button><br/>
@@ -111,29 +111,7 @@ if(pokeFocused) {
 
     </div>
     </div>
-  ) /*(
-    <div className="p-5">
-    
-    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-      {pokeList.map((pokemon:PokePreview, index) => (
-            
-        <Grid item xs={2} sm={4} md={4} key={index}>
-            
-          <div className='text-center border pt-3 pb-3 rounded'>
-          <Button color="success" onClick={() => focusPokemon(pokemon)}>
-        {pokemon.nom}, je te choisis !
-      </Button><br/>
-            <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
-            <Button variant="contained" href={"/pokemon?id="+pokemon.pokeId}>Plus d&apos;infos</Button><br/>
-            </div>
-          
-        </Grid>
-        
-      ))}
-    </Grid>
-      
-    </div>
-  )*/
+  )
 }
     
 export default Starter
