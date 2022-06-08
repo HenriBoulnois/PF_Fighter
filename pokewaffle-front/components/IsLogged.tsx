@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { UserProfile, useUser } from '@auth0/nextjs-auth0';
+import { useUser } from '@auth0/nextjs-auth0';
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ const IsLogged: NextPage = ({children}) => {
     userId: string,
     starterPokemon: number,
   }
-    const { user, error, isLoading } = useUser();
+    const { user } = useUser();
     const [userApi, setUserApi] = useState<UserApi>();
     const id = user?.sub?.substring(user.sub.indexOf('|')+1,user.sub.length)
       useEffect(() => {

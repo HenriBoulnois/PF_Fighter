@@ -86,33 +86,7 @@ const Pokemon: NextPage = () => {
       
     </div>
   </div>
-  )/*(
-    <div className="p-5">
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        height="140"
-        image={pokemon.image}
-        alt={pokemon.nom}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {pokemon.nom}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-         {pokemon.description}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-         Poids : {pokemon.poids}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-         Taille : {pokemon.taille}
-        </Typography>
-      </CardContent>
-    </Card>
-
-    </div>
-  )*/
+  )
 }
     
 export default Pokemon
