@@ -46,39 +46,6 @@ const Character: NextPage = () => {
     
 }
 if(characterFocused) {
-  /*return (
-    <Grid
-  container
-  direction="row"
-  justifyContent="center"
-  alignItems="stretch"
->
-<Item>
-        <Card sx={{ maxWidth: 200 }}>
-      <CardMedia
-        component="img"
-        height="140"
-        image={characterFocused.photo}
-        alt={characterFocused.nom}
-      />
-    </Card>
-    </Item>
-    <Item>
-      <Card>
-      <CardContent>
-        <Typography gutterBottom variant="body2" component="div">
-          {characterFocused.description}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-        <Button color="success" onClick={() => choseCharacter(characterFocused.charId)}>
-        {characterFocused.nom}
-      </Button>
-        </Typography>
-      </CardContent>
-      </Card>
-    </Item>
-    </Grid>
-  )*/
   return(
     <div className='flex flex-column'>
     <div className='basis-1/4'>
@@ -129,30 +96,7 @@ return (
 
     </div>
     </div>
-)/*(
-    <div className="p-5 visible">
-    
-    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-      {characterList.map((character:CharacterPreview, index) => (
-            
-        <Grid item xs={2} sm={4} md={4} key={index}>
-            
-          <div className='text-center border pt-3 pb-3 rounded'>
-          <Button color="success" onClick={() => focusCharacter(character)}>
-        {character.nom}
-      </Button><br/>
-            <Image src={character.photo} height={631} width={245} alt={character.nom}></Image><br/>
-            <Button variant="contained" href={"/characterFocused?id="+character.charId}>Plus d&apos;infos</Button><br/>
-            </div>
-          
-        </Grid>
-        
-      ))}
-    </Grid>
-      
-    </div>
-)*/
-  
+)  
 }
     
 export default Character

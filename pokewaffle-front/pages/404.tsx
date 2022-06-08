@@ -23,12 +23,7 @@ const ErrorPage: NextPage = () => {
       
     </div>
   </div>
-    )/*(
-        
-        <div className="text-center bottom-0 absolute pt-5">
-            
-        </div>
-    )*/
+    )
 }
 
 export default ErrorPage

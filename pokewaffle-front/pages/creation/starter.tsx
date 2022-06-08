@@ -53,29 +53,6 @@ const Starter: NextPage = () => {
     Router.push("/");
 }
 if(pokeFocused) {
-  /*return (
-  <div>
-        <Card sx={{ maxWidth: 200 }}>
-      <CardMedia
-        component="img"
-        height="140"
-        image={pokeFocused.image}
-        alt={pokeFocused.nom}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {pokeFocused.nom}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-        <Button color="success" onClick={() => choseStarter(pokeFocused.pokeId)}>
-        {pokeFocused.nom}
-      </Button>
-        </Typography>
-      </CardContent>
-    </Card>
-
-      </div>
-  )*/
   return(
     <div className='flex flex-column'>
     <div className='basis-1/4'>
