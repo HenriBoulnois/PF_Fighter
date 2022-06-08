@@ -4,6 +4,7 @@ import Image from "next/image";
 import IsLogged from '../../components/IsLogged';
 import { useRouter } from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0';
+import Link from 'next/link';
 
 interface UserPreview {
     userId: number,
@@ -114,12 +115,12 @@ const VersusFight: NextPage = () => {
       <div className='basis-3/6'>
           {opponentTeamList?.user.nom}
       {opponentTeamList?.team?.map((pokemon:PokePreview, index) => (
-    
+          <Link href={"/fight/winner?opponentid="+opponentTeamList.user.userId+"&spoke=25&opoke="+pokemon.pokeId} passHref={true}>
           <div className='text-center border pt-3 pb-3 rounded'>
-            
             <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
-            {pokemon.nom}
+            {pokemon.nom} 
           </div>
+          </Link>
       ))}
       </div>
     </div>

@@ -40,9 +40,9 @@ const LoginHeader: NextPage = () => {
     const userImage = () => {
       if(userApi?.photo) {
         return userApi?.photo
-      } else {
+      } /*else {
         return "https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png"
-      }
+      }*/
     }/*
    return (
        <div>

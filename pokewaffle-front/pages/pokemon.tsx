@@ -30,6 +30,7 @@ const Pokemon: NextPage = () => {
     async function getPokemon() {
         
       const response = await fetch("http://pokefighter.hopto.org:8090/pokemons/"+id);
+      //const response = await fetch("http://192.168.137.1:8090/pokemons/"+id);
       setPokemon(await response.json())
     }
     if(id) {

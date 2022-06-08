@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
 import Image from "next/image";
 import IsLogged from '../../components/IsLogged';
+import Link from 'next/link';
 
 interface UserPreview {
     userId: number,
@@ -89,17 +90,20 @@ const MainFight: NextPage = () => {
       </div>
       <div className='basis-3/6'>
       {usersTeamList.map((user) => (
+        <Link href={"/fight/versus?id="+user.userId} passHref={true}>
           <div className='text-center border pt-3 pb-3 rounded'>
             
             <Image src={user.photo} height={30} width={30} alt={user.nom}></Image><br/>
             {user.nom}
             {user.team.map((pokemon => (
               <div>
+                
               <Image src={pokemon.petiteImage} height={50} width={50} alt={pokemon.nom}></Image><br/>
               {pokemon.nom}
               </div>
             )))}
           </div>
+          </Link>
       ))}
       </div>
     </div>
