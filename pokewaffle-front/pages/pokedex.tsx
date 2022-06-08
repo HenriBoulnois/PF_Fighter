@@ -17,7 +17,7 @@ const Pokedex: NextPage = () => {
   const [pokeList, setPokeList] = useState([]);
   useEffect(() => {
     async function getPokemons() {
-      const response = await fetch("http://192.168.137.1:8090/pokemons");
+      const response = await fetch("http://pokefighter.hopto.org:8090/pokemons");
       setPokeList(await response.json())
     }
     getPokemons();

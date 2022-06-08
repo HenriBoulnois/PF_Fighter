@@ -20,7 +20,7 @@ const Starter: NextPage = () => {
       
       useEffect(() => {
         async function getUserApi() {
-          const response = await fetch("http://192.168.137.1:8090/utilisateurs/getByUuid/"+id);
+          const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/getByUuid/"+id);
           setUserApi(await response.json())
         }
         getUserApi();
@@ -31,7 +31,7 @@ const Starter: NextPage = () => {
       const handleSubmit = async (event:any) => {
         event.preventDefault()
           
-      const res = await fetch("http://192.168.137.1:8090/utilisateurs", {
+      const res = await fetch("http://pokefighter.hopto.org:8090/utilisateurs", {
           method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -44,7 +44,7 @@ const Starter: NextPage = () => {
           uuid: id
           }),
       });
-      const response = await fetch("http://192.168.137.1:8090/utilisateurs/getByUuid/"+id);
+      const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/getByUuid/"+id);
           setUserApi(await response.json())
   
   }

@@ -18,11 +18,11 @@ const LoginHeader: NextPage = () => {
     const id = user?.sub?.substring(user.sub.indexOf('|')+1,user.sub.length)
       useEffect(() => {
         async function getUserApi() {
-          const response = await fetch("http://192.168.137.1:8090/utilisateurs/getByUuid/"+id);
+          const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/getByUuid/"+id);
           setUserApi(await response.json())
         }
         getUserApi();
-      }, [user,id])
+      }, [user])
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -38,9 +38,8 @@ const LoginHeader: NextPage = () => {
   if (user) {
     
     const userImage = () => {
-      if(userApi) {
-        console.log(userApi)
-        return userApi.photo
+      if(userApi?.photo) {
+        return userApi?.photo
       } else {
         return "https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png"
       }
@@ -79,7 +78,7 @@ const LoginHeader: NextPage = () => {
       </div>
       <a href="/profil" className="rounded-full self-center bg-sky-700 hover:bg-sky-900 p-3">Profil</a>
       <div>
-      <img className="object-contain h-20 w-20" src={userApi?.photo}/>
+      <img className="object-contain h-20 w-20" src={userImage()}/>
       </div>
       <div className="self-center">
       <a href="/api/auth/logout" className="rounded-full selft-center bg-sky-700 hover:bg-sky-900 p-3">Logout</a>

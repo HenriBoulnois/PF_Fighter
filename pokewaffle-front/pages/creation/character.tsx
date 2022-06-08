@@ -21,7 +21,7 @@ const Character: NextPage = () => {
   const id = user?.sub?.substring(user.sub?.indexOf('|')+1,user.sub?.length)
   useEffect(() => {
     async function getcharacterFocuseds() {
-      const response = await fetch("http://192.168.137.1:8090/utilisateurs/getCharacters");
+      const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/getCharacters");
       setCharacterList(await response.json())
     }
     getcharacterFocuseds();
@@ -30,7 +30,7 @@ const Character: NextPage = () => {
     setCharacterFocused(characterFocused)
   }
   async function choseCharacter(idPersonnage:number) {
-    await fetch("http://192.168.137.1:8090/utilisateurs/setCharacter", {
+    await fetch("http://pokefighter.hopto.org:8090/utilisateurs/setCharacter", {
         method: 'POST',
     headers: {
       'Accept': 'application/json',
