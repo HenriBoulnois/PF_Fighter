@@ -24,7 +24,7 @@ const Starter: NextPage = () => {
   const id = user?.sub?.substring(user?.sub?.indexOf('|')+1,user?.sub?.length)
   useEffect(() => {
     async function getPokemons() {
-      const response = await fetch("http://81.254.98.117:8090/pokemons/getStarters");
+      const response = await fetch("http://192.168.137.1:8090/pokemons/getStarters");
       setPokeList(await response.json())
     }
     getPokemons();
@@ -33,7 +33,7 @@ const Starter: NextPage = () => {
     setPokeFocused(pokemonFocused)
   }
   async function choseStarter(idPokemon:number) {
-    await fetch("http://81.254.98.117:8090/utilisateurs/setStarter", {
+    await fetch("http://192.168.137.1:8090/utilisateurs/setStarter", {
         method: 'POST',
     headers: {
       'Accept': 'application/json',

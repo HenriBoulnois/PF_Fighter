@@ -21,7 +21,7 @@ const Profil: NextPage = () => {
     const id = user?.sub?.substring(user.sub.indexOf('|')+1,user.sub.length)
       useEffect(() => {
         async function getUserApi() {
-          const response = await fetch("http://81.254.98.117:8090/utilisateurs/getByUuid/"+id);
+          const response = await fetch("http://192.168.137.1:8090/utilisateurs/getByUuid/"+id);
           setUserApi(await response.json())
         }
         getUserApi();

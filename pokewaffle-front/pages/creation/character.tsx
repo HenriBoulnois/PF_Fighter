@@ -5,22 +5,33 @@ import { Button, Card, CardContent, CardMedia, Dialog, DialogActions, DialogCont
 import Link from 'next/link';
 import Router from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
 const Character: NextPage = () => {
   const { user, error, isLoading } = useUser();
   interface CharacterPreview {
     charId:number,
     nom:string,
-    photo:string
+    photo:string,
+    description:string
   }
   
   const [characterList, setCharacterList] = useState([]);
   const [characterFocused, setCharacterFocused] = useState<CharacterPreview>();
 
   const id = user?.sub?.substring(user.sub?.indexOf('|')+1,user.sub?.length)
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
   useEffect(() => {
     async function getPokemons() {
-      const response = await fetch("http://81.254.98.117:8090/utilisateurs/getCharacters");
+      const response = await fetch("http://192.168.137.1:8090/utilisateurs/getCharacters");
       setCharacterList(await response.json())
     }
     getPokemons();
@@ -29,7 +40,7 @@ const Character: NextPage = () => {
     setCharacterFocused(characterFocused)
   }
   async function choseCharacter(idPersonnage:number) {
-    await fetch("http://81.254.98.117:8090/utilisateurs/setCharacter", {
+    await fetch("http://192.168.137.1:8090/utilisateurs/setCharacter", {
         method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -42,11 +53,17 @@ const Character: NextPage = () => {
         }),
     });
     Router.push("/creation/starter");
+    Router.reload()
 }
 if(characterFocused) {
-  console.log(characterFocused)
   return (
-  <div>
+    <Grid
+  container
+  direction="row"
+  justifyContent="center"
+  alignItems="stretch"
+>
+<Item>
         <Card sx={{ maxWidth: 200 }}>
       <CardMedia
         component="img"
@@ -54,9 +71,13 @@ if(characterFocused) {
         image={characterFocused.photo}
         alt={characterFocused.nom}
       />
+    </Card>
+    </Item>
+    <Item>
+      <Card>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {characterFocused.nom}
+        <Typography gutterBottom variant="body2" component="div">
+          {characterFocused.description}
         </Typography>
         <Typography variant="body2" color="text.secondary">
         <Button color="success" onClick={() => choseCharacter(characterFocused.charId)}>
@@ -64,9 +85,9 @@ if(characterFocused) {
       </Button>
         </Typography>
       </CardContent>
-    </Card>
-
-      </div>
+      </Card>
+    </Item>
+    </Grid>
   )
 } 
 return (
