@@ -1,5 +1,4 @@
 import '../styles/tailwind.css'
-import 'bootstrap/dist/css/bootstrap.css'
 import type { AppProps } from 'next/app'
 import Layout from '../components/Layout'
 

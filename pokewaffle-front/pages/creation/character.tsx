@@ -1,13 +1,10 @@
 import type { NextPage } from 'next'
 import React, { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image';
-import { Button, Card, CardContent, CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0';
-import { experimentalStyled as styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+
 
 const Character: NextPage = () => {
   const { user, error, isLoading } = useUser();
@@ -22,19 +19,12 @@ const Character: NextPage = () => {
   const [characterFocused, setCharacterFocused] = useState<CharacterPreview>();
 
   const id = user?.sub?.substring(user.sub?.indexOf('|')+1,user.sub?.length)
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
   useEffect(() => {
-    async function getPokemons() {
+    async function getcharacterFocuseds() {
       const response = await fetch("http://192.168.137.1:8090/utilisateurs/getCharacters");
       setCharacterList(await response.json())
     }
-    getPokemons();
+    getcharacterFocuseds();
   }, [])
   function focusCharacter(characterFocused:CharacterPreview) {
     setCharacterFocused(characterFocused)
@@ -53,10 +43,10 @@ const Character: NextPage = () => {
         }),
     });
     Router.push("/creation/starter");
-    Router.reload()
+    
 }
 if(characterFocused) {
-  return (
+  /*return (
     <Grid
   container
   direction="row"
@@ -88,9 +78,58 @@ if(characterFocused) {
       </Card>
     </Item>
     </Grid>
+  )*/
+  return(
+    <div className='flex flex-column'>
+    <div className='basis-1/4'>
+
+    </div>
+    <div className='basis-3/4 flex-row border pt-3 pb-3 rounded'>
+    <div className='text-xl font-bold text-center'>
+        
+        <button color="success" onClick={() => choseCharacter(characterFocused.charId)}>
+          Je choisis {characterFocused.nom}
+          </button>
+      </div>
+      <div className='flex flex-column text-center'>
+        
+        <div className='basis-2/4'>
+          <Image src={characterFocused.photo} height={631} width={245}/>
+        </div>
+        <div className='basis-2/4 text-left m-5'>
+          <p className='font-bold'>Description</p><br/>{characterFocused.description}
+        </div>
+        
+      </div>
+
+    </div>
+    <div className='basis-1/4'>
+      
+    </div>
+  </div>
   )
 } 
 return (
+  <div className='flex flex-column'>
+    <div className='basis-1/4'>
+
+  </div>
+  <div className="grid grid-cols-2 gap-2 m-10 basis-2/4">
+      {characterList.map((character:CharacterPreview, index) => (
+          <div className='text-center border pt-3 pb-3 rounded'>
+          <button onClick={() => focusCharacter(character)}>
+        {character.nom}
+      </button><br/>
+            <Image src={character?.photo} height={315} width={123} alt={character.nom}></Image><br/>
+            {character.nom}
+          </div>
+      ))}
+    </div>
+    <div className='basis-1/4'>
+
+    </div>
+    </div>
+)/*(
     <div className="p-5 visible">
     
     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -103,7 +142,7 @@ return (
         {character.nom}
       </Button><br/>
             <Image src={character.photo} height={631} width={245} alt={character.nom}></Image><br/>
-            <Button variant="contained" href={"/pokemon?id="+character.charId}>Plus d&apos;infos</Button><br/>
+            <Button variant="contained" href={"/characterFocused?id="+character.charId}>Plus d&apos;infos</Button><br/>
             </div>
           
         </Grid>
@@ -112,7 +151,7 @@ return (
     </Grid>
       
     </div>
-)
+)*/
   
 }
     

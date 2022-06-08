@@ -1,11 +1,9 @@
 import type { NextPage } from 'next'
 import React, { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid } from '@mui/material';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0';
-import { Box } from '@mui/system';
 
 const Starter: NextPage = () => {
   interface UserApi {

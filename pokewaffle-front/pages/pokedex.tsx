@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import React, { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image';
-import { Grid } from '@mui/material';
 import Link from 'next/link';
 
 const Pokedex: NextPage = () => {
@@ -25,6 +24,18 @@ const Pokedex: NextPage = () => {
   }, [])
   
   return (
+    <div className="grid grid-cols-4 gap-4 m-10">
+      {pokeList.map((pokemon:PokePreview, index) => (
+        <Link href={"/pokemon?id="+pokemon.pokeId} passHref={true}>
+          <div className='text-center border pt-3 pb-3 rounded'>
+            
+            <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
+            {pokemon.nom}
+          </div>
+          </Link>
+      ))}
+    </div>
+  )/*(
     <div className="p-5">
     
     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -43,7 +54,7 @@ const Pokedex: NextPage = () => {
     </Grid>
       
     </div>
-  )
+  )*/
 }
     
 export default Pokedex

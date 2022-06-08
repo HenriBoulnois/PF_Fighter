@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import { UserProfile, useUser } from '@auth0/nextjs-auth0';
 import Image from 'next/image';
 import React, { useEffect, useState } from "react";
-import { Button, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
 
 const LoginHeader: NextPage = () => {
@@ -45,7 +44,7 @@ const LoginHeader: NextPage = () => {
       } else {
         return "https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png"
       }
-    }
+    }/*
    return (
        <div>
         <Button color="inherit" href="/profil">Profil</Button>
@@ -72,10 +71,28 @@ const LoginHeader: NextPage = () => {
         <Link href="/api/auth/logout" passHref={true}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
       </Menu>
       </div>
-   );
+   );*/
+   return (
+    <div className="basis-1/4 self-center text-center max-h-fit flex flex-row">
+      <div className="self-center m-2 ">
+      {userApi?.nom}
+      </div>
+      <a href="/profil" className="rounded-full self-center bg-sky-700 hover:bg-sky-900 p-3">Profil</a>
+      <div>
+      <img className="object-contain h-20 w-20" src={userApi?.photo}/>
+      </div>
+      <div className="self-center">
+      <a href="/api/auth/logout" className="rounded-full selft-center bg-sky-700 hover:bg-sky-900 p-3">Logout</a>
+      </div>
+    </div>
+   )
     
   }
-  return <Button color="inherit" href="/api/auth/login">Login</Button>;
+  return ( 
+    <div className="basis-1/4 self-center text-center">
+      <a href="/api/auth/login" className="rounded-full bg-sky-700 hover:bg-sky-900 p-3">Login</a>
+    </div>
+  )//<Button color="inherit" href="/api/auth/login">Login</Button>;
 };
 
 export default LoginHeader

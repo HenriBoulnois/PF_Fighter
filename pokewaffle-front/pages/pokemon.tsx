@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Link from "next/link";
 import Image from "next/image";
 import salameche404 from "../public/salameche404.webp"
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { pick } from 'query-string';
 
 const Pokemon: NextPage = () => {
   interface PokePreview {
@@ -15,6 +15,10 @@ const Pokemon: NextPage = () => {
     taille: number,
     poids: number,
     type: [typeId:number,nom:string]
+    pv:number,
+    attaque:number,
+    defense:number,
+    vitesse:number,
   }
   
   const {
@@ -48,6 +52,41 @@ const Pokemon: NextPage = () => {
   }
   
   return (
+  <div className='flex flex-column'>
+    <div className='basis-1/4'>
+
+    </div>
+    <div className='basis-3/4 flex-row text-center border pt-3 pb-3 rounded'>
+      <div className='flex flex-column'>
+        <div className='basis-1/4'>
+          Taille : {pokemon.taille} m <br/>
+          Poids : {pokemon.poids} kg
+        </div>
+        <div className='basis-2/4'>
+          <Image src={pokemon.image} height={200} width={200}/>
+        </div>
+        <div className='basis-1/4'>
+          PV : {pokemon.pv} <br/>
+          Defense : {pokemon.defense} <br/>
+          Attaque : {pokemon.attaque} <br/>
+          Vitesse : {pokemon.vitesse}
+        </div>
+      </div>
+      <div className='text-xl font-bold'>
+        {pokemon.nom}
+      </div>
+      <div className='font-bold'>
+        Description :
+      </div>
+      <div>
+      {pokemon.description}
+      </div>
+    </div>
+    <div className='basis-1/4'>
+      
+    </div>
+  </div>
+  )/*(
     <div className="p-5">
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -73,7 +112,7 @@ const Pokemon: NextPage = () => {
     </Card>
 
     </div>
-  )
+  )*/
 }
     
 export default Pokemon

@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <IsLogged>
-        <p>Text homepage</p>
+        <p>Text homepage logged</p>
       </IsLogged>
           
     </div>
