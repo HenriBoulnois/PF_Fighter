@@ -47,18 +47,19 @@ const LoginHeader: NextPage = () => {
    return (
     <div className="basis-1/4 self-center text-center max-h-fit flex flex-row">
       <div className="self-center m-2 ">
+        <p>Dresseur  </p>
       {userApi?.nom}
       </div>
-      <Link href="/profil">
-      <a className="rounded-full self-center bg-sky-700 hover:bg-sky-900 p-3">Profil</a>
-      </Link>
       <div>
       {/*eslint-disable-next-line @next/next/no-img-element*/}
       <img alt="" className="object-contain h-20 w-20" src={userImage()}/>
       </div>
+      <Link href="/profil">
+      <a className="rounded-full self-center bg-sky-700 hover:bg-sky-800 p-5 m-1">Profil</a>
+      </Link>
       <div className="self-center">
         <Link href="/api/auth/logout">
-      <a className="rounded-full selft-center bg-sky-700 hover:bg-sky-900 p-3">Logout</a>
+      <a className="rounded-full selft-center bg-sky-700 hover:bg-sky-800 p-5 m-1">Logout</a>
       </Link>
       </div>
     </div>
@@ -68,7 +69,7 @@ const LoginHeader: NextPage = () => {
   return ( 
     <div className="basis-1/4 self-center text-center">
       <Link href="/api/auth/login">
-      <a className="rounded-full bg-sky-700 hover:bg-sky-900 p-3">Login</a>
+      <a className="rounded-full bg-sky-700 hover:bg-sky-800 p-5">Login</a>
       </Link>
     </div>
   )//<Button color="inherit" href="/api/auth/login">Login</Button>;

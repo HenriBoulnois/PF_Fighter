@@ -1,14 +1,15 @@
 import type { NextPage } from 'next'
-import IsLogged from '../components/IsLogged'
+import Redirect from '../components/Redirect'
+
 import Login from './profil'
 
 
 const Home: NextPage = () => {
   return (
     <div>
-      <IsLogged>
+      <Redirect>
         <p>Text homepage logged</p>
-      </IsLogged>
+      </Redirect>
           
     </div>
     

@@ -1,9 +1,10 @@
 import type { NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
 import Image from "next/image";
-import IsLogged from '../../components/IsLogged';
+import IsLogged from '../../components/Redirect';
 import { useRouter } from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0';
+import Loading from '../../components/Loading';
 
 interface UserPreview {
     userId: number,
@@ -110,7 +111,7 @@ const WinnerFight: NextPage = () => {
           }
       }, [opponentid, user, opoke, spoke, opponentTeamList?.pokemon.pokeId, opponentTeamList?.user.userId, opponentTeamList?.user.uuid, selfTeamList?.pokemon.pokeId, selfTeamList?.user.userId, selfTeamList?.user.uuid])
   return (
-      <IsLogged>
+    <Loading>
           <div className='flex flex-column'>
     <div className='basis-1/6'>
 
@@ -138,8 +139,7 @@ const WinnerFight: NextPage = () => {
     <div className='basis-1/6'>
     </div>
   </div>
-      </IsLogged>
-  
+  </Loading>
   )
 }
     

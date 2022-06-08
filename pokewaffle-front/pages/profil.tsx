@@ -4,8 +4,9 @@ import Image from 'next/image';
 import { useEffect, useState } from "react";
 import Router from "next/router";
 import LoginHeader from "../components/LoginHeader";
-import IsLogged from "../components/IsLogged";
+import IsLogged from "../components/Redirect";
 import Link from "next/link";
+import Redirect from "../components/Redirect";
 
 const Profil: NextPage = () => {
   interface UserApi {
@@ -35,9 +36,9 @@ const Profil: NextPage = () => {
         }
       }
   return (
-    <IsLogged>
+    <Redirect>
       Welcome {userApi?.nom}! <Image src={userImage()} width={200} height={200} alt={user?.name!}></Image><Link href="/api/auth/logout">Logout</Link>
-  </IsLogged>
+  </Redirect>
   );
 };
 
