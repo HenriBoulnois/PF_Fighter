@@ -1,6 +1,5 @@
 import { NextPage } from "next";
-import { UserProfile, useUser } from '@auth0/nextjs-auth0';
-import Image from 'next/image';
+import { useUser } from '@auth0/nextjs-auth0';
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -23,15 +22,8 @@ const LoginHeader: NextPage = () => {
         }
         getUserApi();
       }, [user,id])
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-      setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-    
+
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 

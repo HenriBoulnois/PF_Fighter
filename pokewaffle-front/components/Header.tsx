@@ -1,8 +1,6 @@
-import { NextPage } from "next";
 import React, { useEffect, useState } from 'react'
 import Link from "next/link";
 import LoginHeader from "./LoginHeader";
-import Image from "next/image";
 
 interface PokePreview {
   pokeId: number
