@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Link from "next/link";
 import Image from "next/image";
@@ -53,10 +53,10 @@ const Pokemon: NextPage = () => {
       setUserApi(await response.json())
     }
     getUserApi();
-  }, [id,userApi])
-  function catchPokemon() {
-    console.log(userApi)
-    fetch("http://pokefighter.hopto.org:8090/utilisateurs/"+userApi?.userId+"/addPokemonToEquipe/"+id, {
+  }, [id,iduser])
+  async function catchPokemon() {
+    async function addToTeam() {
+    await fetch("http://pokefighter.hopto.org:8090/utilisateurs/"+userApi?.userId+"/addPokemonToEquipe/"+id, {
         method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -65,6 +65,9 @@ const Pokemon: NextPage = () => {
     },
   
     });
+  }
+  addToTeam()
+  Router.push("/equipe");
   }
   if(!pokemon) { 
       return(
@@ -87,7 +90,8 @@ const Pokemon: NextPage = () => {
 
     </div>
     <div className='basis-3/4 flex-row text-center border pt-3 pb-3 rounded'>
-    <button  onClick={() => catchPokemon()}>{pokemon.nom}, je te choisis</button>
+    {userApi ? <button className='text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800' 
+    onClick={() => catchPokemon()}>{pokemon.nom}, je te choisis</button> : <></>}
       <div className='flex flex-column'>
         <div className='basis-1/4'>
           Taille : {pokemon.taille} m <br/>

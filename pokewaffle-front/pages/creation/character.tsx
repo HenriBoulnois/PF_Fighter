@@ -42,7 +42,7 @@ const Character: NextPage = () => {
             idCharacter: idPersonnage
         }),
     });
-    Router.push("/creation/starter");
+     Router.push("/creation/starter");  
     
 }
 if(characterFocused) {

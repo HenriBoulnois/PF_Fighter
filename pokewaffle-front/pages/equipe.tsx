@@ -92,10 +92,8 @@ const Equipe: NextPage = () => {
             }); 
             return res;      
         }
-        async function reloading(promise:any) {
-            Router.reload()
-        }
-        reloading( await getResult())
+        await getResult()
+        Router.reload()
     }
       
   return (
@@ -114,7 +112,7 @@ const Equipe: NextPage = () => {
             </div>
             <div className="basis-1/2 self-center">
                 <div className="text-justify m-2">{pokemon.description}</div>
-                <div className="m-2"><a href={"/pokemon?id="+pokemon.pokeId}>Plus d`&apos;`infos</a></div>
+                <div className="m-2"><a href={"/pokemon?id="+pokemon.pokeId}>Plus d&apos;infos</a></div>
                 <button className="m-2" onClick={() => rendreSauvage(selfTeamList.user.equipe[index].eqId)}>Bye bye {pokemon.nom}</button>
             </div>
           </div>

@@ -55,7 +55,7 @@ const Starter: NextPage = () => {
   
     });
   }
-  }, [userApi])
+  }, [userApi,pokeFocused?.pokeId])
   function focusPokemon(pokemonFocused:PokePreview) {
     setPokeFocused(pokemonFocused)
   }
@@ -82,7 +82,7 @@ if(pokeFocused) {
     <div className='basis-1/4'>
 
     </div>
-    <div className='basis-3/4 flex-row text-center border pt-3 pb-3 rounded'>
+    <div className='basis-3/4 flex-row text-center border pt-4 pb-4 rounded'>
     <button  onClick={() => choseStarter(pokeFocused.pokeId)}>{pokeFocused.nom}, je te choisis</button>
       <div className='flex flex-column'>
         <div className='basis-1/4'>
