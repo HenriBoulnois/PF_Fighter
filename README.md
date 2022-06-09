@@ -6,11 +6,11 @@ Ce repository est la partie frontend de notre projet.
 
 Backend  : [Accessible ici](https://github.com/cybe-m1/Pokemons_Backend_PPC)
 
-__
+___
 
 **Technos :** Next Js, Tailwind, Auth0
 
 **Authors :** [Adrien Bassail](https://github.com/Adrien-Ba), [Henri Boulnois](https://github.com/HenriBoulnois)
 
-__
+___
 
