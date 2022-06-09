@@ -45,15 +45,20 @@ const LoginHeader: NextPage = () => {
       }
     }
    return (
+     <div className="flex flex-column">
+     <div className="text-white basis-1/4 self-center text-center max-h-fit flex flex-row">
+             <a href="/fight/choice" className="text-white rounded-full bg-sky-700 hover:bg-sky-900 p-5 m-1">
+            Combats
+          </a>
+     </div>
     <div className="text-white basis-1/4 self-center text-center max-h-fit flex flex-row">
-      <div className="self-center m-2 ">
+      
+      <div className="basis-1/4 self-center m-2 ">
         <p>Dresseur  </p>
       {userApi?.nom}
       </div>
-      <div>
       {/*eslint-disable-next-line @next/next/no-img-element*/}
-      <img alt="" className="object-contain h-20 w-20" src={userImage()}/>
-      </div>
+      <img alt="" className="max-h-20 max-w-20" src={userImage()}/>
       <Link href="/profil">
       <a className="text-white rounded-full self-center bg-sky-700 hover:bg-sky-800 p-5 m-1">Profil</a>
       </Link>
@@ -61,6 +66,8 @@ const LoginHeader: NextPage = () => {
         <Link href="/api/auth/logout">
       <a className="text-white rounded-full selft-center bg-sky-700 hover:bg-sky-800 p-5 m-1">Logout</a>
       </Link>
+      
+      </div>
       </div>
     </div>
    )

@@ -34,18 +34,13 @@ const Header: React.FC = () => {
             Site Pokémon Next JS
         </a>
         </Link>
-        <div className="basis-1/3">
-
-        </div>
-        <div className="basis-1/4 self-center text-right">
+        <div className="basis-2/5 self-center text-right">
         <Link href={"/pokedex"}>
           <a className="text-white rounded-full bg-sky-700 hover:bg-sky-800 p-5 m-1">        
               Pokedex
           </a>
           </Link>
-          <a href="/fight/choice" className="text-white rounded-full bg-sky-700 hover:bg-sky-900 p-5 m-1">
-            Combats
-          </a>
+          
         </div>
         <LoginHeader/>
       </div>
