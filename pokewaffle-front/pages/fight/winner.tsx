@@ -43,9 +43,17 @@ interface UserPokemonPreview{
     pokemon: PokePreview;
 
 }
+interface ResultPreview {
+  pvPokemon1:number,
+  pvPokemon2:number,
+  idPokemonGagnant:number,
+  idUtilisateurGagnant: number,
+  nomPokemonGagnant:string
+}
 const WinnerFight: NextPage = () => {
     const [opponentTeamList,setOpponentTeamList] = useState<UserPokemonPreview>()
     const [selfTeamList,setSelfTeamList] = useState<UserPokemonPreview>()
+    const [result,setResult] = useState<ResultPreview>()
     const { user } = useUser();
     const {
         query: {selfid,opponentid,spoke,opoke}
@@ -102,7 +110,7 @@ const WinnerFight: NextPage = () => {
                   idUtilisateur2: opponentTeamList?.user.userId
               }),
           });
-          console.log(res);
+          setResult(await res.json())
         }
           if(opponentid) {
             getOpponent();
@@ -119,19 +127,32 @@ const WinnerFight: NextPage = () => {
     <div className='basis-1/6'>
 
     </div>
-    <div className='basis-5/6 flex flex-column text-center border pt-3 pb-3 rounded'>
+    <div className='basis-5/6 flex-row text-center border pt-3 pb-3 rounded'>
+      <div className='basis-1/6'>
+        {result?.idUtilisateurGagnant ? result.idUtilisateurGagnant==selfTeamList?.user.userId ? <div>{selfTeamList.user.nom} a gagné !</div> : <div>{selfTeamList?.user.nom} a gagné !</div>: <div></div>} 
+        Félicitations {result?.nomPokemonGagnant} 
+        </div>
+      <div className='basis-5/6 flex flex-column '>
       <div className='basis-3/6'>  
-      {selfTeamList?.user.nom} a gagné/perdu<br/>
       <Image src={selfTeamList ? selfTeamList.user.character.photo : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} alt="image self" width={150} height={400}/>
       <Image src={selfTeamList ? selfTeamList.pokemon.image : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} alt="image pokemon opposant" width={200} height={200}/>
+      <br/>{selfTeamList?.user.nom}
+      {
+        result?.pvPokemon1 ? result!.pvPokemon1>0 ? <div className=''>{result.pvPokemon1}</div> : <div className='bg-black'>{result.pvPokemon1}</div> : <div></div>
+      }
       </div>
       <div className='basis-3/6'>
-      {opponentTeamList?.user.nom} a gagné/perdu<br/>
-      <Image src={opponentTeamList ? opponentTeamList.user.character.photo : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} alt="image opposant" width={150} height={400}/>
+        
+      <Image src={opponentTeamList?.user.character ? opponentTeamList.user.character.photo : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} alt="image opposant" width={150} height={400}/>
             <Image src={opponentTeamList ? opponentTeamList.pokemon.image : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} alt="image pokemon opposant" width={200} height={200}/>
-
+            <br/>{opponentTeamList?.user.nom}
+            {
+        result?.pvPokemon2 ? result!.pvPokemon2>0 ? <div className=''>{result.pvPokemon2}</div> : <div className='bg-black'>{result.pvPokemon2}</div> : <div></div>
+      }
+      </div>
       </div>
     </div>
+  
     <div className='basis-1/6'>
     </div>
   </div>

@@ -55,7 +55,7 @@ const LoginHeader: NextPage = () => {
      <div className="flex flex-column">
      <div className="text-white basis-1/4 self-center text-center max-h-fit flex flex-row">
              <a href={userId()} className="text-white rounded-full bg-sky-700 hover:bg-sky-900 p-5 m-1">
-            Combats
+            Combattre
           </a>
      </div>
     <div className="text-white basis-1/4 self-center text-center max-h-fit flex flex-row">
