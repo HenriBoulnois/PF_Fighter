@@ -5,6 +5,16 @@ import Link from "next/link";
 import Image from "next/image";
 import salameche404 from "../public/salameche404.webp"
 import { pick } from 'query-string';
+import { useUser } from '@auth0/nextjs-auth0';
+
+interface UserApi {
+  uuid: string,
+  nom: string,
+  photo: string,
+  email: string,
+  userId: string,
+  starterPokemon: number,
+}
 
 const Pokemon: NextPage = () => {
   interface PokePreview {
@@ -24,8 +34,10 @@ const Pokemon: NextPage = () => {
   const {
       query: {id}
   } = useRouter()
-
+  const { user, error, isLoading } = useUser();
+  const [userApi, setUserApi] = useState<UserApi>();
   const [pokemon, setPokemon] = useState<PokePreview>();
+  const iduser = user?.sub?.substring(user.sub.indexOf('|')+1,user.sub.length)
   useEffect(() => {
     async function getPokemon() {
         
@@ -36,7 +48,24 @@ const Pokemon: NextPage = () => {
     if(id) {
         getPokemon();
     }
-  }, [id])
+    async function getUserApi() {
+      const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/getByUuid/"+iduser);
+      setUserApi(await response.json())
+    }
+    getUserApi();
+  }, [id,userApi])
+  function catchPokemon() {
+    console.log(userApi)
+    fetch("http://pokefighter.hopto.org:8090/utilisateurs/"+userApi?.userId+"/addPokemonToEquipe/"+id, {
+        method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
+      'Access-Control-Allow-Origin':'*'
+    },
+  
+    });
+  }
   if(!pokemon) { 
       return(
         <div className="text-center bottom-0 absolute pt-5">
@@ -58,6 +87,7 @@ const Pokemon: NextPage = () => {
 
     </div>
     <div className='basis-3/4 flex-row text-center border pt-3 pb-3 rounded'>
+    <button  onClick={() => catchPokemon()}>{pokemon.nom}, je te choisis</button>
       <div className='flex flex-column'>
         <div className='basis-1/4'>
           Taille : {pokemon.taille} m <br/>
@@ -83,6 +113,7 @@ const Pokemon: NextPage = () => {
       {pokemon.description}
       </div>
     </div>
+    {}
     <div className='basis-1/4'>
       
     </div>

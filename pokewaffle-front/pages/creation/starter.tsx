@@ -19,7 +19,18 @@ interface PokePreview {
   defense:number,
   vitesse:number,
 }
+interface UserApi {
+  uuid: string,
+  nom: string,
+  photo: string,
+  email: string,
+  userId: string,
+  starterPokemon: number,
+}
 const Starter: NextPage = () => {
+
+  
+  const [userApi, setUserApi] = useState<UserApi>();
   const { user, error, isLoading } = useUser();
   
   const [pokeList, setPokeList] = useState([]);
@@ -32,7 +43,19 @@ const Starter: NextPage = () => {
       setPokeList(await response.json())
     }
     getPokemons();
-  }, [])
+    if(userApi) {
+      console.log(userApi)
+      fetch("http://pokefighter.hopto.org:8090/utilisateurs/"+userApi?.userId+"/addPokemonToEquipe/"+pokeFocused?.pokeId, {
+        method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
+      'Access-Control-Allow-Origin':'*'
+    },
+  
+    });
+  }
+  }, [userApi])
   function focusPokemon(pokemonFocused:PokePreview) {
     setPokeFocused(pokemonFocused)
   }
@@ -49,7 +72,8 @@ const Starter: NextPage = () => {
             idStarter: idPokemon
         }),
     });
-    Router.reload()
+    const response = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/getByUuid/"+id);
+    setUserApi(await response.json())
     Router.push("/");
 }
 if(pokeFocused) {
