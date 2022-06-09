@@ -39,11 +39,11 @@ const Header: React.FC = () => {
         </div>
         <div className="basis-1/4 self-center text-right">
         <Link href={"/pokedex"}>
-          <a className="rounded-full bg-sky-700 hover:bg-sky-800 p-5 m-1">        
+          <a className="text-white rounded-full bg-sky-700 hover:bg-sky-800 p-5 m-1">        
               Pokedex
           </a>
           </Link>
-          <a href="/fight/main" className="rounded-full bg-sky-700 hover:bg-sky-900 p-5 m-1">
+          <a href="/fight/choice" className="text-white rounded-full bg-sky-700 hover:bg-sky-900 p-5 m-1">
             Combats
           </a>
         </div>
