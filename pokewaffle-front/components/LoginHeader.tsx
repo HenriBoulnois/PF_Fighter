@@ -65,7 +65,7 @@ const LoginHeader: NextPage = () => {
     </div>
    )
     
-  }
+  } else {
   return ( 
     <div className="basis-1/4 self-center text-center">
       <Link href="/api/auth/login">
@@ -73,6 +73,6 @@ const LoginHeader: NextPage = () => {
       </Link>
     </div>
   )//<Button color="inherit" href="/api/auth/login">Login</Button>;
-};
+  }};
 
 export default LoginHeader

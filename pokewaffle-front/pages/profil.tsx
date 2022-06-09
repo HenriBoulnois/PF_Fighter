@@ -16,9 +16,37 @@ const Profil: NextPage = () => {
     email: string,
     userId: string,
     starterPokemon: number,
+    description: string,
+    character:{
+      photo: string,
+    }
   }
+  interface PokeStarter {
+    pokeId: number
+    nom: string,
+    description: string
+    image: string,
+    taille: number,
+    poids: number,
+    petiteImage: string,
+    type: {
+      typeId:number,
+      nom:string
+    }[]
+    pv:number,
+    attaque:number,
+    defense:number,
+    vitesse:number,
+  }
+
+  
+  
+
+  
   const { user, error, isLoading } = useUser();
   const [userApi, setUserApi] = useState<UserApi>();
+  const [pokeStarter, setPokeStarter] = useState<PokeStarter>();
+
     const id = user?.sub?.substring(user.sub.indexOf('|')+1,user.sub.length)
       useEffect(() => {
         async function getUserApi() {
@@ -37,7 +65,22 @@ const Profil: NextPage = () => {
       }
   return (
     <Redirect>
-      Welcome {userApi?.nom}! <Image src={userImage()} width={200} height={200} alt={user?.name!}></Image><Link href="/api/auth/logout">Logout</Link>
+       <div className='flex flex-column'>
+       <div className='basis-1/4'></div>
+
+       <div className='basis-2/4 flex-row text-center border pt-3 pb-3 rounded'>
+        <div className='basis-2/4'>
+          <Image src={userImage()} height={200} width={200} alt="Image de profil"/>
+        </div>
+        <div className="text-xl font-bold">
+          {userApi?.nom}
+        </div>
+        <div className='font-bold'>
+          {userApi?.description}
+        </div>
+      </div>
+      <div className='basis-1/4'></div>
+     </div>
   </Redirect>
   );
 };
