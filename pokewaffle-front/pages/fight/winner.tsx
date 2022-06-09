@@ -138,7 +138,7 @@ const WinnerFight: NextPage = () => {
       <Image src={selfTeamList ? selfTeamList.pokemon.image : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} alt="image pokemon opposant" width={200} height={200}/>
       <br/>{selfTeamList?.user.nom}
       {
-        result?.pvPokemon1 ? result!.pvPokemon1>0 ? <div className=''>{result.pvPokemon1}</div> : <div className='bg-black'>{result.pvPokemon1}</div> : <div></div>
+        result?.pvPokemon1 ? result!.pvPokemon1>0 ? <div className='bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900'>{result.pvPokemon1}</div> : <div className='bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900'>{result.pvPokemon1}</div> : <div></div>
       }
       </div>
       <div className='basis-3/6'>
@@ -147,7 +147,7 @@ const WinnerFight: NextPage = () => {
             <Image src={opponentTeamList ? opponentTeamList.pokemon.image : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} alt="image pokemon opposant" width={200} height={200}/>
             <br/>{opponentTeamList?.user.nom}
             {
-        result?.pvPokemon2 ? result!.pvPokemon2>0 ? <div className=''>{result.pvPokemon2}</div> : <div className='bg-black'>{result.pvPokemon2}</div> : <div></div>
+        result?.pvPokemon2 ? result!.pvPokemon2>0 ? <div className='bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900'>{result.pvPokemon2}</div> : <div className='bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900'>{result.pvPokemon2}</div> : <div></div>
       }
       </div>
       </div>

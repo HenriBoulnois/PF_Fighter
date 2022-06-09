@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from "react";
 import Redirect from "../components/Redirect";
 import Link from "next/link";
+import Router from "next/router";
 
 interface UserPreview {
     userId: number,
@@ -78,9 +79,25 @@ const Equipe: NextPage = () => {
               getSelf(uuid!);
           }
       }, [user])
-      function rendreSauvage(pokeId:number) {
-
-      }
+      async function rendreSauvage(pokeId:number) {
+        console.log(pokeId)
+        async function getResult() {
+            const res = await fetch("http://pokefighter.hopto.org:8090/utilisateurs/removePokemonFromEquipe/"+pokeId, {
+                method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json; charset=utf-8',
+              'Access-Control-Allow-Origin':'*'
+            },
+            }); 
+            return res;      
+        }
+        async function reloading(promise:any) {
+            Router.reload()
+        }
+        reloading( await getResult())
+    }
+      
   return (
     <Redirect>
        <div className='flex flex-column'>
@@ -98,7 +115,7 @@ const Equipe: NextPage = () => {
             <div className="basis-1/2 self-center">
                 <div className="text-justify m-2">{pokemon.description}</div>
                 <div className="m-2"><a href={"/pokemon?id="+pokemon.pokeId}>Plus d`&apos;`infos</a></div>
-                <button className="m-2" onClick={() => rendreSauvage(pokemon.pokeId)}>Bye bye {pokemon.nom}</button>
+                <button className="m-2" onClick={() => rendreSauvage(selfTeamList.user.equipe[index].eqId)}>Bye bye {pokemon.nom}</button>
             </div>
           </div>
 
