@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
 import Image from "next/image";
-import IsLogged from '../../components/Redirect';
 import { useRouter } from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0';
 import Link from 'next/link';
@@ -44,7 +43,7 @@ interface UserTeamPreview{
 const VersusFight: NextPage = () => {
     const [opponentTeamList,setOpponentTeamList] = useState<UserTeamPreview>()
     const [selfTeamList,setSelfTeamList] = useState<UserTeamPreview>()
-    const { user, error, isLoading } = useUser();
+    const { user} = useUser();
     const {
         query: {selfid,id,spoke}
     } = useRouter()
@@ -136,41 +135,7 @@ const VersusFight: NextPage = () => {
         </div>
       </div>
     </Loading>
-  ) /*(
-    <Loading>
-          <div className='flex flex-column'>
-    <div className='basis-1/6'>
-
-    </div>
-    <div className='basis-5/6 flex flex-column text-center border pt-3 pb-3 rounded'>
-      <div className='basis-3/6'>  
-      {selfTeamList?.user.nom}
-      {selfTeamList?.team?.map((pokemon:PokePreview, index) => (
-    
-          <div key={index} className='text-center border pt-3 pb-3 rounded'>
-            
-            <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
-            {pokemon.nom}
-          </div>
-      ))} 
-      </div>
-      <div className='basis-3/6'>
-          {opponentTeamList?.user.nom}
-      {opponentTeamList?.team?.map((pokemon:PokePreview, index) => (
-          <Link key={index} href={"/fight/winner?opponentid="+opponentTeamList.user.userId+"&spoke=25&opoke="+pokemon.pokeId} passHref={true}>
-          <div className='text-center border pt-3 pb-3 rounded'>
-            <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
-            {pokemon.nom} 
-          </div>
-          </Link>
-      ))}
-      </div>
-    </div>
-    <div className='basis-1/6'>
-    </div>
-  </div>
-  </Loading>
-  )*/
+  )
 }
     
 export default VersusFight

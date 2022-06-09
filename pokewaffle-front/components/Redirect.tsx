@@ -37,8 +37,8 @@ const Redirect: NextPage = ({children}) => {
         return (
           <div>
             <p>
-              Vous n&apos;avez pas encore choisi votre personnage ou votre Pokémon, êtes-vous prêt à sauter le pas ?
-              Veuillez choisir votre starter : <Link href="/creation/user">CLiquer</Link>
+              Vous n&apos;avez pas encore choisi votre personnage ou votre Pokémon, êtes-vous prêt à sauter le pas ?<br/>
+              <Link passHref={true} href="/creation/user"><button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Cliquer sur ce bouton pour vous créer un dresseur</button></Link>
             </p>
           </div>
           
@@ -49,7 +49,8 @@ const Redirect: NextPage = ({children}) => {
   }else {
   return (
       <div>
-          <p>Vous n&apos;êtes pas encore connecté, cliquez en haut à droite pour nous rejoindre</p>
+          <p>Vous n&apos;êtes pas encore connecté, cliquez en haut à droite pour nous rejoindre.</p>
+          <p>Vous pouvez tout de même accéder au Pokedex</p>
       </div>      
   )
   }

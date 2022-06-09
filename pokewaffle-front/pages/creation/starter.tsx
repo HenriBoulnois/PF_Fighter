@@ -122,11 +122,11 @@ if(pokeFocused) {
     <div className='basis-1/4'>
 
   </div>
-  <div className="grid grid-cols-3 gap-3 m-10 basis-2/4">
+  <div className="grid grid-cols-4 gap-4 m-10 basis-2/4">
       {pokeList.map((pokemon:PokePreview, index) => (
           <div key={index} className='text-center border pt-3 pb-3 rounded'>
           <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => focusPokemon(pokemon)}>
-        Plus d'infos
+        Plus d&apos;infos
       </button><br/>
             <Image src={pokemon?.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
             {pokemon.nom}

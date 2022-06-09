@@ -84,7 +84,7 @@ return (
     </div>
     <div className="basis-2/4">
       
-      <span className="bg-purple-100 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">Choix du personnage :</span> Cliquer sur un des personnages pour obtenir plus d'informations 
+      <span className="bg-purple-100 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">Choix du personnage :</span> Cliquer sur un des personnages pour obtenir plus d&apos;informations 
     </div>
     <div className='basis-1/4'>
 
@@ -97,7 +97,7 @@ return (
         {characterList.map((character: CharacterPreview, index) => (
           <div key={index} className='text-center border pt-3 pb-3 rounded'>
             <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => focusCharacter(character)}>
-            Plus d'infos
+            Plus d&apos;infos
             </button><br />
             <Image src={character?.photo} height={315} width={123} alt={character.nom}></Image><br />
             {character.nom}

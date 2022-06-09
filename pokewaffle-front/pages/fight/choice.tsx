@@ -90,6 +90,7 @@ const ChoiceFight: NextPage = () => {
     {selfTeamList?.user.nom}
     </div>
     <div className='basis-4/6 flex flex-column text-center pt-3 pb-3 rounded'> 
+    Choisissez votre Pokemon :
       
       {selfTeamList?.team?.map((pokemon:PokePreview, index) => (
         <Link key={index} passHref={true} href={"/fight/main?id="+selfTeamList.user.userId+"&spoke="+pokemon.pokeId}>
