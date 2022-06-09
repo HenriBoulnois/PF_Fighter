@@ -15,7 +15,10 @@ interface UserPreview {
     equipe: {
         eqId:number,
         idPokemon:number,
-    }[]
+    }[],
+    character:{
+      photo:string
+    }
 }
 interface PokePreview {
   pokeId: number
@@ -45,7 +48,7 @@ const WinnerFight: NextPage = () => {
     const [selfTeamList,setSelfTeamList] = useState<UserPokemonPreview>()
     const { user } = useUser();
     const {
-        query: {opponentid,spoke,opoke}
+        query: {selfid,opponentid,spoke,opoke}
     } = useRouter()
   
       
@@ -118,22 +121,15 @@ const WinnerFight: NextPage = () => {
     </div>
     <div className='basis-5/6 flex flex-column text-center border pt-3 pb-3 rounded'>
       <div className='basis-3/6'>  
-      {selfTeamList?.user.nom}
-          <div className='text-center border pt-3 pb-3 rounded'>
-            
-        
-            {selfTeamList?.pokemon.nom}
-          </div>
+      {selfTeamList?.user.nom} a gagné/perdu<br/>
+      <Image src={selfTeamList ? selfTeamList.user.character.photo : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} alt="image self" width={150} height={400}/>
+      <Image src={selfTeamList ? selfTeamList.pokemon.image : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} alt="image pokemon opposant" width={200} height={200}/>
       </div>
       <div className='basis-3/6'>
-          {opponentTeamList?.user.nom}
-     
-    
-          <div className='text-center border pt-3 pb-3 rounded'>
-            
-            
-            {opponentTeamList?.pokemon.nom}
-          </div>
+      {opponentTeamList?.user.nom} a gagné/perdu<br/>
+      <Image src={opponentTeamList ? opponentTeamList.user.character.photo : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} alt="image opposant" width={150} height={400}/>
+            <Image src={opponentTeamList ? opponentTeamList.pokemon.image : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} alt="image pokemon opposant" width={200} height={200}/>
+
       </div>
     </div>
     <div className='basis-1/6'>

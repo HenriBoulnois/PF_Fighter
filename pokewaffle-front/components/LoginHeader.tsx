@@ -44,10 +44,17 @@ const LoginHeader: NextPage = () => {
         return "https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png"
       }
     }
+    const userId = () => {
+      if(userApi?.userId) {
+        return "/fight/choice?id="+userApi?.userId
+      } else {
+        return "/creation/user"
+      }
+    }
    return (
      <div className="flex flex-column">
      <div className="text-white basis-1/4 self-center text-center max-h-fit flex flex-row">
-             <a href="/fight/choice" className="text-white rounded-full bg-sky-700 hover:bg-sky-900 p-5 m-1">
+             <a href={userId()} className="text-white rounded-full bg-sky-700 hover:bg-sky-900 p-5 m-1">
             Combats
           </a>
      </div>

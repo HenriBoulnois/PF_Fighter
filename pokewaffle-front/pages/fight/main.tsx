@@ -4,6 +4,7 @@ import Image from "next/image";
 import IsLogged from '../../components/Redirect';
 import Link from 'next/link';
 import Loading from '../../components/Loading';
+import { useRouter } from 'next/router';
 
 interface UserPreview {
     userId: number,
@@ -49,7 +50,9 @@ interface UserTeamPreview{
 
 const MainFight: NextPage = () => {
   const [usersTeamList, setUsersTeamList] = useState<UserTeamPreview[]>([])
-  
+  const {
+    query: {id,spoke}
+} = useRouter()
   
   async function getPokemonTeam(idPokemonEquipe:number) {
     const res = await fetch("http://pokefighter.hopto.org:8090/pokemons/"+idPokemonEquipe);
@@ -81,7 +84,42 @@ const MainFight: NextPage = () => {
     }
     getUsers();
   }, [])
-  return (
+  return(
+    <Loading>
+      <div className='flex-row'>
+        <div className='text-center self-center basis-1/8'>
+        Choisissez le dresseur que vous allez affronter !
+        </div>
+        <div className='basis-7/8'>
+        <div className="grid grid-cols-4 gap-4 m-10">
+            {usersTeamList.map((dresseur:UserTeamPreview, index) => (
+              <Link key={index} href={"/fight/versus?selfid="+id+"&id="+dresseur.userId+"&spoke="+spoke} passHref={true}>
+              <div>
+          <div className='text-center border pt-5 rounded h-full'>
+            
+            <Image src={dresseur.photo} height={50} width={50} alt={dresseur.nom}></Image><br/>
+            {dresseur.nom}
+            <div className="grid grid-cols-3 gap-3 m-5">
+            {dresseur.team.map((pokemon:PokePreview, index2) => (
+              <div key={index2}>
+          <div className='text-center'>
+            
+            <Image src={pokemon.petiteImage} height={50} width={50} alt={pokemon.nom}></Image>
+            
+          </div>
+          </div>
+      ))}
+    </div>
+        </div>
+          </div>
+          </Link>
+      ))}
+    </div>
+        </div>
+      </div>
+    </Loading>
+  )
+  /*return (
     <Loading>
           <div className='flex flex-column'>
     <div className='basis-1/6'>
@@ -114,7 +152,7 @@ const MainFight: NextPage = () => {
     </div>
   </div>
   </Loading>
-  )
+  )*/
 }
     
 export default MainFight

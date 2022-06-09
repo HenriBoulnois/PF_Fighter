@@ -16,7 +16,10 @@ interface UserPreview {
     equipe: {
         eqId:number,
         idPokemon:number,
-    }[]
+    }[],
+    character: {
+      photo:string
+    }
 }
 interface PokePreview {
   pokeId: number
@@ -82,18 +85,20 @@ const ChoiceFight: NextPage = () => {
   return (
     <Loading>
           <div className='flex flex-column'>
-    <div className='basis-1/6'>
-
+    <div className='basis-1/6 text-center'>
+    <Image src={selfTeamList ? selfTeamList?.user.character.photo : 'https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png'} height={400} width={150} alt="self image"></Image><br/>
+    {selfTeamList?.user.nom}
     </div>
-    <div className='basis-4/6 flex flex-column text-center border pt-3 pb-3 rounded'> 
-      {selfTeamList?.user.nom}
+    <div className='basis-4/6 flex flex-column text-center pt-3 pb-3 rounded'> 
+      
       {selfTeamList?.team?.map((pokemon:PokePreview, index) => (
-    
-          <div key={index} className='text-center border pt-3 pb-3 rounded'>
+        <Link key={index} passHref={true} href={"/fight/main?id="+selfTeamList.user.userId+"&spoke="+pokemon.pokeId}>
+          <div  className='text-center self-center m-5 pt-3 pb-3 rounded'>
             
             <Image src={pokemon.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
             {pokemon.nom}
           </div>
+          </Link>
       ))} 
       </div>
   </div>

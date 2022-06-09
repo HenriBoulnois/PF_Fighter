@@ -46,7 +46,7 @@ const VersusFight: NextPage = () => {
     const [selfTeamList,setSelfTeamList] = useState<UserTeamPreview>()
     const { user, error, isLoading } = useUser();
     const {
-        query: {id}
+        query: {selfid,id,spoke}
     } = useRouter()
    
       async function getPokemonTeam(idPokemonEquipe:number) {
@@ -94,9 +94,49 @@ const VersusFight: NextPage = () => {
           if(user) {
               const uuid = user?.sub?.substring(user.sub.indexOf('|')+1,user.sub.length)
               getSelf(uuid!);
+              
           }
-      }, [id, user])
+      }, [id, user,])
+      const opponentImage = () => {
+        if(opponentTeamList?.user?.photo) {
+          return opponentTeamList?.user?.photo
+        } else {
+          return "https://www.breakflip.com/uploads/Pok%C3%A9mon/Artwork/179.png"
+        }
+      }
   return (
+    <Loading>
+        <div className='flex-row'>
+        <div className='text-center self-center basis-1/8'>
+        Choisissez le pokemon que vous allez affronter !
+        </div>
+        <div className='basis-7/8'>
+           
+              <div>
+          <div className='text-center border pt-5 rounded h-full ml-5 mr-5'>
+            
+            <Image src={opponentImage()} height={100} width={100} alt={opponentTeamList?.user.nom}></Image><br/>
+            {opponentTeamList?.user.nom}
+            <div className="grid grid-cols-3 gap-3 m-2">
+            {opponentTeamList?.team.map((pokemon:PokePreview, index2) => (
+              <Link key={index2} href={"/fight/winner?selfid="+selfid+"&opponentid="+opponentTeamList.user.userId+"&spoke="+spoke+"&opoke="+pokemon.pokeId} passHref={true}>
+              <div>
+          <div className='text-center'>
+            
+            <Image src={pokemon.image} height={100} width={100} alt={pokemon.nom}></Image>
+            
+          </div>
+          </div>
+          </Link>
+      ))}
+    </div>
+        </div>
+          </div>
+
+        </div>
+      </div>
+    </Loading>
+  ) /*(
     <Loading>
           <div className='flex flex-column'>
     <div className='basis-1/6'>
@@ -130,7 +170,7 @@ const VersusFight: NextPage = () => {
     </div>
   </div>
   </Loading>
-  )
+  )*/
 }
     
 export default VersusFight
