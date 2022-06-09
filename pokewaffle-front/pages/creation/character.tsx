@@ -48,54 +48,66 @@ const Character: NextPage = () => {
 if(characterFocused) {
   return(
     <div className='flex flex-column'>
-    <div className='basis-1/4'>
+      <div className='basis-1/4'>
 
-    </div>
-    <div className='basis-3/4 flex-row border pt-3 pb-3 rounded'>
-    <div className='text-xl font-bold text-center'>
-        
-        <button color="success" onClick={() => choseCharacter(characterFocused.charId)}>
+      </div>
+      <div className='basis-3/4 flex-row border pt-3 pb-3 rounded'>
+        <div className='text-xl font-bold text-center'>
+          <button className='mr-5 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900'
+            onClick={() => { Router.reload() }}> Retour</button>
+        <button className='ml-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+        color="success" onClick={() => choseCharacter(characterFocused.charId)}>
           Je choisis {characterFocused.nom}
-          </button>
+        </button>
       </div>
       <div className='flex flex-column text-center'>
-        
+
         <div className='basis-2/4'>
-          <Image src={characterFocused.photo} height={631} width={245} alt="characterFocusedPhoto"/>
+          <Image src={characterFocused.photo} height={631} width={245} alt="characterFocusedPhoto" />
         </div>
         <div className='basis-2/4 text-left m-5'>
-          <p className='font-bold'>Description</p><br/>{characterFocused.description}
+          <p className='font-bold'>Description</p><br />{characterFocused.description}
         </div>
-        
+
       </div>
 
-    </div>
-    <div className='basis-1/4'>
-      
-    </div>
+    </div><div className='basis-1/4'>
+
+      </div>
   </div>
   )
 } 
 return (
-  <div className='flex flex-column'>
+  <><div className='flex flex-column'>
     <div className='basis-1/4'>
 
-  </div>
-  <div className="grid grid-cols-2 gap-2 m-10 basis-2/4">
-      {characterList.map((character:CharacterPreview, index) => (
+    </div>
+    <div className="basis-2/4">
+      
+      <span className="bg-purple-100 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">Choix du personnage :</span> Cliquer sur un des personnages pour obtenir plus d'informations 
+    </div>
+    <div className='basis-1/4'>
+
+    </div>
+  </div><div className='flex flex-column'>
+      <div className='basis-1/4'>
+
+      </div>
+      <div className="grid grid-cols-2 gap-2 m-10 basis-2/4">
+        {characterList.map((character: CharacterPreview, index) => (
           <div key={index} className='text-center border pt-3 pb-3 rounded'>
-          <button onClick={() => focusCharacter(character)}>
-        {character.nom}
-      </button><br/>
-            <Image src={character?.photo} height={315} width={123} alt={character.nom}></Image><br/>
+            <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => focusCharacter(character)}>
+            Plus d'infos
+            </button><br />
+            <Image src={character?.photo} height={315} width={123} alt={character.nom}></Image><br />
             {character.nom}
           </div>
-      ))}
-    </div>
-    <div className='basis-1/4'>
+        ))}
+      </div>
+      <div className='basis-1/4'>
 
-    </div>
-    </div>
+      </div>
+    </div></>
 )  
 }
     
