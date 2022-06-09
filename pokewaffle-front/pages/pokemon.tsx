@@ -74,11 +74,12 @@ const Pokemon: NextPage = () => {
         <div className="text-center bottom-0 absolute pt-5">
         <h1>Ce pokemon n&apos;a pas encore été découvert !</h1>
         <a>Vous pourrez retourner sur la page principale en suivant ce Salamèche : </a><br/>
-        <Link href="/" passHref={true}><Image 
-            src={salameche404}
-            width={200}
-            height={200}
-            alt="errorpagesalameche"/>
+        <Link href="/" passHref={true}>
+        <Image 
+                src="https://www.pokepedia.fr/images/2/20/Salam%C3%A8che-PDMDX.png"
+                width="200"
+                height="200"
+                alt="errorpagesalameche"/>
         </Link>    
     </div>
       );

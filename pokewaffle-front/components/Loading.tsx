@@ -1,8 +1,6 @@
 import { NextPage } from "next";
 import { useUser } from '@auth0/nextjs-auth0';
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { isGeneratorFunction } from "util/types";
 
 const Loading: NextPage = ({children}) => {
   interface UserApi {

@@ -12,10 +12,11 @@ const ErrorPage: NextPage = () => {
     <div className='basis-3/4 flex-row text-center border pt-3 pb-3 rounded'>
     <h1>Cette page n&apos;a pas été trouvée</h1>
             <a>Vous pourrez retourner sur la page principale en suivant ce Salamèche : </a><br/>
-            <Link href="/" passHref={true}><Image 
-                src={salameche404}
-                width={200}
-                height={200}
+            <Link href="/" passHref={true}>
+            <Image 
+                src="https://www.pokepedia.fr/images/2/20/Salam%C3%A8che-PDMDX.png"
+                width="150"
+                height="200"
                 alt="errorpagesalameche"/>
             </Link>    
     </div>

@@ -62,7 +62,7 @@ interface MatchesPreview {
   nomPokemonGagnant: string,
   idUtilisateurGagnant: number
   petitePhotoGagnant: string,
-  petitPhotoPerdant: string
+  petitePhotoPerdant: string
 }[]
 
 
@@ -152,8 +152,8 @@ const Profil: NextPage = () => {
                   </div>
                 ))}
               </div>
-              <a href="/equipe"><button type="button" className="mt-10 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Equipe</button>
-              </a>
+              <Link passHref={true} href={"/equipe"}><button type="button" className="mt-10 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Equipe</button>
+              </Link>
               </div>
             </div>
             <div className="basis-2/6 ">
@@ -162,8 +162,8 @@ const Profil: NextPage = () => {
                <div key={index2} className='text-left pt-2'>
             
                 {match.idUtilisateurGagnant==selfTeamList?.user.userId ? <p className="bg-green-100 text-green-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Victoire</p> : <p className="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">Défaite</p> } 
-                / {match.nomPokemonGagnant} / {match.idPokemon1==match.idPokemonGagnant ? match.idPokemon2 : match.idPokemon1}
-                / PV restant :{match.pvPokemon1>0 ? match.pvPokemon1 : match.idPokemon2}
+                <Image src={match.petitePhotoGagnant} height={100} width={100} alt=""/> <Image className="grayscale" src={match.petitePhotoPerdant} height={100} width={100} alt=""/>
+                <br/>PV restant :{match.pvPokemon1>0 ? match.pvPokemon1 : match.idPokemon2}
 
                 </div>
                 ))}
