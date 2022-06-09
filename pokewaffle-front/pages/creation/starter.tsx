@@ -83,7 +83,9 @@ if(pokeFocused) {
 
     </div>
     <div className='basis-3/4 flex-row text-center border pt-4 pb-4 rounded'>
-    <button  onClick={() => choseStarter(pokeFocused.pokeId)}>{pokeFocused.nom}, je te choisis</button>
+    <button className='mr-5 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900'
+            onClick={() => { Router.reload() }}> Retour</button>
+    <button className='ml-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' onClick={() => choseStarter(pokeFocused.pokeId)}>{pokeFocused.nom}, je te choisis</button>
       <div className='flex flex-column'>
         <div className='basis-1/4'>
           Taille : {pokeFocused.taille} m <br/>
@@ -123,8 +125,8 @@ if(pokeFocused) {
   <div className="grid grid-cols-3 gap-3 m-10 basis-2/4">
       {pokeList.map((pokemon:PokePreview, index) => (
           <div key={index} className='text-center border pt-3 pb-3 rounded'>
-          <button onClick={() => focusPokemon(pokemon)}>
-        {pokemon.nom}
+          <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => focusPokemon(pokemon)}>
+        Plus d'infos
       </button><br/>
             <Image src={pokemon?.image} height={200} width={200} alt={pokemon.nom}></Image><br/>
             {pokemon.nom}
